@@ -1,8 +1,9 @@
-import 'dart:async';
-
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+
+import 'package:flutter_movies/network/api.dart';
+import 'package:flutter_movies/utils/preference_util.dart';
 import 'package:flutter_movies/view/screen/login_screen.dart';
-import 'package:teq_flutter_core/teq_flutter_core.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -14,15 +15,29 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    Timer(
-      Duration(seconds: 3),
-      () {
+    _checkToken();
+  }
+
+  _checkToken() async {
+    await ApiClient(Dio()).getRequestToken().then((value) async {
+      if (value.success) {
+        await PreferenceUtils.setString('requestToken', value.request_token);
         Navigator.of(context)
             .pushReplacement(MaterialPageRoute(builder: (_) => LoginScreen()));
-      },
-    );
+      } else {
+        AlertDialog(
+          title: Text('Request Faiel'),
+          content: Text('Request Fail'),
+          actions: [
+            FlatButton(
+              onPressed: () {},
+              child: Text('Ok'),
+            )
+          ],
+        );
+      }
+    });
   }
 
   @override

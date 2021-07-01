@@ -49,16 +49,19 @@ class _LoginScreenState extends State<LoginScreen> {
               Container(
                 width: MediaQuery.of(context).size.width - 20,
                 height: 60,
-                child: RaisedButton(
+                child: ElevatedButton(
                   onPressed: () {},
                   child: Text(
                     'Login',
                     style: TextStyle(fontSize: 24),
                   ),
-                  color: Colors.red,
-                  textColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red,
+                    textStyle: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                   ),
                 ),
               ),
@@ -82,32 +85,34 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     width: 150,
                     height: 50,
-                    child: RaisedButton(
+                    child: ElevatedButton(
                       onPressed: () {},
                       child: Text(
                         'Facebook',
                         style: TextStyle(fontSize: 24),
                       ),
-                      color: Colors.blue,
-                      textColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                       ),
                     ),
                   ),
                   Container(
                     width: 150,
                     height: 50,
-                    child: RaisedButton(
+                    child: ElevatedButton(
                       onPressed: () {},
                       child: Text(
                         'Google',
                         style: TextStyle(fontSize: 24),
                       ),
-                      color: Colors.redAccent,
-                      textColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.redAccent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                       ),
                     ),
                   ),
