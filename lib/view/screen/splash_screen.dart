@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_movies/network/api.dart';
 import 'package:flutter_movies/utils/preference_util.dart';
 import 'package:flutter_movies/view/screen/login_screen.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -23,19 +24,12 @@ class _SplashScreenState extends State<SplashScreen> {
     await ApiClient(Dio()).getRequestToken().then((value) async {
       if (value.success) {
         await PreferenceUtils.setString('requestToken', value.request_token);
+        print(value.request_token);
+        Fluttertoast.showToast(msg: value.request_token);
         Navigator.of(context)
             .pushReplacement(MaterialPageRoute(builder: (_) => LoginScreen()));
       } else {
-        AlertDialog(
-          title: Text('Request Faiel'),
-          content: Text('Request Fail'),
-          actions: [
-            FlatButton(
-              onPressed: () {},
-              child: Text('Ok'),
-            )
-          ],
-        );
+        Fluttertoast.showToast(msg: 'Error');
       }
     });
   }

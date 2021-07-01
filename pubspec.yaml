@@ -31,6 +31,7 @@ dependencies:
   shared_preferences: ^2.0.6
   retrofit: ^2.0.0
   json_annotation: ^4.0.1
+  fluttertoast: ^8.0.7
   dio: ^4.0.0
   get_it: any
   teq_flutter_core:

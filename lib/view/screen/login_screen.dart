@@ -1,4 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_movies/models/authentication/request_token.dart';
+import 'package:flutter_movies/network/api.dart';
+import 'package:flutter_movies/utils/preference_util.dart';
+import 'package:flutter_movies/view/screen/home_screen.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_movies/models/authentication/login_authentication.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -8,6 +15,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController _usernameCtrl = TextEditingController();
+  TextEditingController _passwordCtrl = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,40 +27,67 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               Image.asset(
                 'assets/images/logo.png',
-                height: 200,
-                width: 200,
+                height: 250,
+                width: 250,
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      hintText: 'Username',
-                      prefixIcon: Icon(Icons.person),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      )),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: TextFormField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                      hintText: 'Password',
-                      prefixIcon: Icon(Icons.lock),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      )),
-                ),
-              ),
+              Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter your username or password';
+                            }
+                          },
+                          controller: _usernameCtrl,
+                          decoration: InputDecoration(
+                            hintText: 'Username',
+                            prefixIcon: Icon(Icons.person),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter your username or password';
+                            }
+                          },
+                          obscureText: true,
+                          controller: _passwordCtrl,
+                          decoration: InputDecoration(
+                            hintText: 'Password',
+                            prefixIcon: Icon(Icons.lock),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
               SizedBox(
-                height: 40,
+                height: 30,
               ),
               Container(
                 width: MediaQuery.of(context).size.width - 20,
                 height: 60,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (_) => HomeScreen()));
+                    } else {
+                      Fluttertoast.showToast(msg: 'Login Failed!');
+                    }
+                  },
                   child: Text(
                     'Login',
                     style: TextStyle(fontSize: 24),
@@ -66,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               SizedBox(
-                height: 40,
+                height: 30,
               ),
               Text(
                 'OR',
@@ -77,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               SizedBox(
-                height: 40,
+                height: 30,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
