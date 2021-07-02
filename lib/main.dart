@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_movies/config/config_splash_screen.dart';
 
 import 'package:flutter_movies/view/screen/splash_screen.dart';
 import 'package:teq_flutter_core/teq_flutter_core.dart';

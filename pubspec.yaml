@@ -33,6 +33,7 @@ dependencies:
   json_annotation: ^4.0.1
   fluttertoast: ^8.0.7
   dio: ^4.0.0
+  equatable: ^2.0.3
   get_it: any
   teq_flutter_core:
     git:
