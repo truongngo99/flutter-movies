@@ -1,8 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_movies/view/screen/login_screen.dart';
-import 'package:teq_flutter_core/teq_flutter_core.dart';
+import 'package:flutter_movies/config/config_splash_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -14,16 +11,23 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    Timer(
-      Duration(seconds: 3),
-      () {
-        Navigator.of(context)
-            .pushReplacement(MaterialPageRoute(builder: (_) => LoginScreen()));
-      },
-    );
+    ConfigSplash().checkToken(context);
   }
+
+  // _checkToken() async {
+  //   await ApiClient(Dio()).getRequestToken().then((value) async {
+  //     if (value.success) {
+  //       await PreferenceUtils.setString('requestToken', value.request_token);
+  //       print(value.request_token);
+  //       Fluttertoast.showToast(msg: value.request_token);
+  //       Navigator.of(context)
+  //           .pushReplacement(MaterialPageRoute(builder: (_) => LoginScreen()));
+  //     } else {
+  //       Fluttertoast.showToast(msg: 'Error');
+  //     }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
