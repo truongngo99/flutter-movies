@@ -32,10 +32,11 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<RequestToken> login(requestLogin) async {
+  Future<RequestToken> login(loginBody) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _data = requestLogin;
+    final _data = <String, dynamic>{};
+    _data.addAll(loginBody.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
         RequestToken>(Options(
             method: 'POST', headers: <String, dynamic>{}, extra: _extra)
@@ -44,6 +45,22 @@ class _ApiClient implements ApiClient {
             queryParameters: queryParameters, data: _data)
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = RequestToken.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CreateSession> createSession(requestToken) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'request_token': requestToken};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
+        CreateSession>(Options(
+            method: 'POST', headers: <String, dynamic>{}, extra: _extra)
+        .compose(_dio.options,
+            'authentication/session/new?api_key=a7e38c80a0efc42034dfb5c8b95a72cb',
+            queryParameters: queryParameters, data: _data)
+        .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CreateSession.fromJson(_result.data!);
     return value;
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_movies/utils/preference_util.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -8,7 +9,9 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home Screen'),
+        
       ),
+      body: Text('${PreferenceUtils.getString('session_id')}'),
     );
   }
 }

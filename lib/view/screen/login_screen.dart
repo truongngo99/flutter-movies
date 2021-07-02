@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
             SnackBar(
               content: Text('Login Failed'),
               duration: Duration(
-                microseconds: 500,
+                seconds: 1,
               ),
             ),
           );
