@@ -11,7 +11,7 @@ ListMoviePopular _$ListMoviePopularFromJson(Map<String, dynamic> json) {
     adult: json['adult'] as bool,
     backdrop_path: json['backdrop_path'] as String?,
     genre_ids:
-        (json['genre_ids'] as List<dynamic>).map((e) => e as int).toList(),
+        (json['genre_ids'] as List<dynamic>?)?.map((e) => e as int).toList(),
     id: json['id'] as int,
     original_language: json['original_language'] as String,
     original_title: json['original_title'] as String,

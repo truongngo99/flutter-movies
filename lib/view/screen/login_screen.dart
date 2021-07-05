@@ -5,8 +5,9 @@ import 'package:flutter_movies/bloc/login/login_event.dart';
 import 'package:flutter_movies/bloc/login/login_state.dart';
 import 'package:flutter_movies/models/authentication/login_body.dart';
 import 'package:flutter_movies/utils/preference_util.dart';
+import 'package:flutter_movies/view/home.dart';
 
-import 'package:flutter_movies/view/screen/home_screen.dart';
+import 'package:flutter_movies/view/screen/movie_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginScreen extends StatefulWidget {

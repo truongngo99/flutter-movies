@@ -6,7 +6,7 @@ part 'list_movie.g.dart';
 class ListMoviePopular {
   bool adult;
   String? backdrop_path;
-  List<int> genre_ids;
+  List<int>? genre_ids;
   int id;
   String original_language;
   String original_title;

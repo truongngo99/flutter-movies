@@ -9,7 +9,6 @@ import 'package:flutter_movies/network/api.dart';
 import 'package:flutter_movies/utils/preference_util.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  //final RequestToken? requestToken;
   LoginBloc() : super(LoginLoading());
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
