@@ -3,6 +3,8 @@ import 'package:flutter_movies/models/authentication/create_session.dart';
 
 import 'package:flutter_movies/models/authentication/login_body.dart';
 import 'package:flutter_movies/models/authentication/request_token.dart';
+import 'package:flutter_movies/models/movie_popular/list_movie.dart';
+import 'package:flutter_movies/models/movie_popular/movie_popular.dart';
 import 'package:retrofit/http.dart';
 part 'api.g.dart';
 
@@ -18,5 +20,9 @@ abstract class ApiClient {
   Future<RequestToken> login(@Body() LoginBody loginBody);
 
   @POST('authentication/session/new?api_key=a7e38c80a0efc42034dfb5c8b95a72cb')
-  Future<CreateSession> createSession(@Query('request_token') String requestToken);
+  Future<CreateSession> createSession(
+      @Query('request_token') String requestToken);
+
+  @GET('movie/popular?api_key=a7e38c80a0efc42034dfb5c8b95a72cb')
+  Future<MoviePopular> getListMovieFopular();
 }

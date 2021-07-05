@@ -14,17 +14,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
     if (event is LoginButtonEvent) {
-      bool check = false;
-      String errorMessage;
-
-
       try {
         var result = await ApiClient(Dio()).login(event.loginBody);
 
-        if (result.success){
-
-         var session= await ApiClient(Dio()).createSession(PreferenceUtils.getString('requestToken'));
-         PreferenceUtils.setString('session_id', session.session_id);
+        if (result.success) {
+          var session = await ApiClient(Dio())
+              .createSession(PreferenceUtils.getString('requestToken'));
+          PreferenceUtils.setString('session_id', session.session_id);
 
           yield LoginSuccess();
         }

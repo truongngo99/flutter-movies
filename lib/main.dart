@@ -1,8 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_movies/bloc/login/login_bloc.dart';
 
 import 'package:flutter_movies/models/authentication/login_body.dart';
+import 'package:flutter_movies/network/api.dart';
+import 'package:flutter_movies/view/screen/home_screen.dart';
 
 import 'package:flutter_movies/view/screen/splash_screen.dart';
 import 'package:teq_flutter_core/teq_flutter_core.dart';
@@ -39,7 +42,7 @@ class _MyAppState extends State<MyApp> {
           primarySwatch: Colors.red,
         ),
         enableConfigView: true,
-        home: SplashScreen(),
+        home: HomeScreen(),
         width: 200,
         height: 812,
       ),
