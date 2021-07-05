@@ -16,35 +16,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (event is LoginButtonEvent) {
       bool check = false;
       String errorMessage;
-      // var result = await ApiClient(Dio()).login(event.loginBody);
 
-      // if (check = result.success) {
-      //   yield LoginSuccess();
-      // } else {
-
-      // }
-
-      // await ApiClient(Dio()).login(event.loginBody).then((value) async* {
-      //   check = value.success;
-      //   print(check);
-      //   if (check) {
-      //     yield LoginSuccess();
-      //   }
-      // }).catchError((Object obj) async* {
-      //   switch (obj.runtimeType) {
-      //     case DioError:
-      //       final res = (obj as DioError).response;
-      //       print('res: $res');
-      //       if (res!.data['error'] == "Unauthorized") {
-      //         errorMessage = 'Ten dang nhap sai';
-      //       } else {
-      //         errorMessage = res.data['error'];
-      //         break;
-      //       }
-      //       check = false;
-      //       yield LoginFailed();
-      //   }
-      // });
 
       try {
         var result = await ApiClient(Dio()).login(event.loginBody);
@@ -62,6 +34,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         if (!res) {
           yield LoginFailed();
         }
+        yield LoginLoading();
       }
     }
   }

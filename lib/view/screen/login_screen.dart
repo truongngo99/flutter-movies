@@ -20,9 +20,10 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController _usernameCtrl = TextEditingController();
   TextEditingController _passwordCtrl = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return BlocListener(
+    return BlocConsumer(
       bloc: BlocProvider.of<LoginBloc>(context),
       listener: (context, state) {
         if (state is LoginFailed) {
@@ -36,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
           );
         }
       },
-      child: BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
+      builder: (context, state) {
         return Scaffold(
           body: SingleChildScrollView(
             child: Center(
@@ -115,19 +116,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                         'requestToken'));
                                 BlocProvider.of<LoginBloc>(context)
                                     .add(LoginButtonEvent(loginBody: body));
-                                // BlocListener(
-                                //   bloc: BlocProvider.of<LoginBloc>(context),
-                                //   listener: (context, state) {
-                                //     if (state is LoginSuccess) {
-                                //       Navigator.of(context).pushReplacement(
-                                //           MaterialPageRoute(
-                                //               builder: (_) => HomeScreen()));
-                                //     }
-                                //   },
-                                //   child: Container(),
-                                // );
-                              } else {
-                                Fluttertoast.showToast(msg: 'Login Failed!');
                               }
                             },
                             child: Text(
@@ -202,7 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         );
-      }),
+      },
     );
   }
 }

@@ -11,16 +11,10 @@ abstract class LoginState extends Equatable {
 
 class LoginLoading extends LoginState {}
 
-class LoginSuccess extends LoginState {}
+class LoginSuccess extends LoginState {
+
+}
 
 class LoginFailed extends LoginState {
-  // final String error;
 
-  // const LoginFailed({required this.error});
-
-  // @override
-  // List<Object> get props => [error];
-
-  // @override
-  // String toString() => 'Error: {$error}';
 }
