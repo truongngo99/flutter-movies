@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_movies/bloc/login/login_bloc.dart';
+import 'package:flutter_movies/bloc/movie_trending/movie_trending_bloc.dart';
+import 'package:flutter_movies/bloc/now_playing/now_playing_bloc.dart';
+import 'package:flutter_movies/bloc/popular/popular_bloc.dart';
+import 'package:flutter_movies/bloc/top_rate/top_rate_bloc.dart';
+import 'package:flutter_movies/bloc/upcoming/upcoming_bloc.dart';
 
-import 'package:flutter_movies/models/authentication/login_body.dart';
+import 'package:flutter_movies/view/home.dart';
 
-import 'package:flutter_movies/view/screen/splash_screen.dart';
 import 'package:teq_flutter_core/teq_flutter_core.dart';
 
 void main() {
@@ -32,6 +36,13 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<LoginBloc>(create: (context) => LoginBloc()),
+        BlocProvider<PopularBloc>(create: (context) => PopularBloc()),
+        BlocProvider<NowPlayingBloc>(create: (context) => NowPlayingBloc()),
+        BlocProvider<MovieTrendingBloc>(
+            create: (context) => MovieTrendingBloc()),
+        BlocProvider<MovieTopRateBloc>(create: (context) => MovieTopRateBloc()),
+        BlocProvider<MovieUpcomingBloc>(
+            create: (context) => MovieUpcomingBloc()),
       ],
       child: TeqCoreApp(
         debugShowCheckedModeBanner: false,
@@ -39,9 +50,9 @@ class _MyAppState extends State<MyApp> {
           primarySwatch: Colors.red,
         ),
         enableConfigView: true,
-        home: SplashScreen(),
-        width: 200,
-        height: 812,
+        home: HomeScreen(),
+        width: double.infinity,
+        height: double.infinity,
       ),
     );
   }

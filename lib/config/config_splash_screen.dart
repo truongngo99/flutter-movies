@@ -29,14 +29,3 @@ class ConfigSplash {
     }
   }
 }
- // await ApiClient(Dio()).getRequestToken().then((value) async {
-    //   if (value.success) {
-    //     await PreferenceUtils.setString('requestToken', value.request_token);
-    //     print(value.request_token);
-    //     //Fluttertoast.showToast(msg: value.request_token);
-    //     Navigator.of(context)
-    //         .pushReplacement(MaterialPageRoute(builder: (_) => LoginScreen()));
-    //   } else {
-    //     print('faile');
-    //   }
-    // });
