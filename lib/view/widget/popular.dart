@@ -32,7 +32,7 @@ class PopularWidget extends StatelessWidget {
                         topRight: Radius.circular(5),
                       ),
                       child: Image.network(
-                        'https://image.tmdb.org/t/p/original${listResult!.results[index].poster_path}',
+                        'https://image.tmdb.org/t/p/original${listResult!.results[index].poster_path ?? ''}',
                         fit: BoxFit.fitWidth,
                         height: 150,
                         width: 150,

@@ -18,3 +18,5 @@ class PopularSuccess extends PopularState {
   @override
   String toString() => 'MoviePopular: $moviePopular';
 }
+
+class PopularFailed extends PopularState {}

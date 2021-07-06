@@ -11,10 +11,15 @@ class NowPlayingBloc extends Bloc<NowPlayingEvent, NowPlayingState> {
 
   @override
   Stream<NowPlayingState> mapEventToState(NowPlayingEvent event) async* {
-    if (event is PopularEventStart) {
-      var result = await ApiClient(Dio()).getListMoviePlaying();
-      print(result.total_pages);
-      yield NowPlayingSuccess(result);
+    if (event is NowPlayingEventStart) {
+      try {
+        var result = await ApiClient(Dio()).getListMoviePlaying();
+
+        yield NowPlayingSuccess(result);
+      } catch (e) {
+        print(e.toString());
+        yield NowPlayingFailed();
+      }
     }
   }
 }

@@ -3,9 +3,9 @@ import 'package:flutter_movies/models/movie_now_playing/movie_now_playing.dart';
 import 'package:flutter_movies/models/movie_popular/movie_popular.dart';
 
 class NowPlayingWidget extends StatelessWidget {
-  final MovieNowPlaying? listResult;
+  final MovieNowPlayingModel listResult;
   NowPlayingWidget({
-    this.listResult,
+    required this.listResult,
     Key? key,
   }) : super(key: key);
 
@@ -16,7 +16,7 @@ class NowPlayingWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: listResult!.results.length,
+          itemCount: listResult.results.length,
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {
@@ -33,7 +33,7 @@ class NowPlayingWidget extends StatelessWidget {
                         topRight: Radius.circular(5),
                       ),
                       child: Image.network(
-                        'https://image.tmdb.org/t/p/original${listResult!.results[index].poster_path}',
+                        'https://image.tmdb.org/t/p/original${listResult.results[index].poster_path ?? ''}',
                         fit: BoxFit.fitWidth,
                         height: 150,
                         width: 150,
@@ -42,7 +42,7 @@ class NowPlayingWidget extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        '${listResult!.results[index].title}',
+                        '${listResult.results[index].title}',
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                         ),

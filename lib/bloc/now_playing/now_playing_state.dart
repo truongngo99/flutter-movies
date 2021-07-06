@@ -11,7 +11,7 @@ abstract class NowPlayingState extends Equatable {
 class NowPlayingLoading extends NowPlayingState {}
 
 class NowPlayingSuccess extends NowPlayingState {
-  final MovieNowPlaying movieNowPlaying;
+  final MovieNowPlayingModel movieNowPlaying;
 
   NowPlayingSuccess(this.movieNowPlaying);
   @override
@@ -19,3 +19,5 @@ class NowPlayingSuccess extends NowPlayingState {
   @override
   String toString() => 'MoviePopular: $movieNowPlaying';
 }
+
+class NowPlayingFailed extends NowPlayingState {}

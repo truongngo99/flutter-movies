@@ -10,9 +10,14 @@ class PopularBloc extends Bloc<PopularEvent, PopularState> {
   @override
   Stream<PopularState> mapEventToState(PopularEvent event) async* {
     if (event is PopularEventStart) {
-      var result = await ApiClient(Dio()).getListMovieFopular();
+      try {
+        var result = await ApiClient(Dio()).getListMovieFopular();
 
-      yield PopularSuccess(result);
+        yield PopularSuccess(result);
+      } catch (e) {
+        print(e.toString());
+        yield PopularFailed();
+      }
     }
   }
 }

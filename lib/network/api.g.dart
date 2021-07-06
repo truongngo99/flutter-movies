@@ -81,18 +81,34 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<MovieNowPlaying> getListMoviePlaying() async {
+  Future<MovieNowPlayingModel> getListMoviePlaying() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<MovieNowPlaying>(Options(
+        _setStreamType<MovieNowPlayingModel>(Options(
                 method: 'GET', headers: <String, dynamic>{}, extra: _extra)
             .compose(_dio.options,
                 'movie/now_playing?api_key=a7e38c80a0efc42034dfb5c8b95a72cb',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MovieNowPlaying.fromJson(_result.data!);
+    final value = MovieNowPlayingModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<MovieTrendingModel> getListMovieTrending() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MovieTrendingModel>(
+            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options,
+                    'trending/all/day?api_key=a7e38c80a0efc42034dfb5c8b95a72cb',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = MovieTrendingModel.fromJson(_result.data!);
     return value;
   }
 

@@ -6,6 +6,7 @@ import 'package:flutter_movies/models/authentication/request_token.dart';
 import 'package:flutter_movies/models/movie_now_playing/movie_now_playing.dart';
 import 'package:flutter_movies/models/movie_popular/list_movie.dart';
 import 'package:flutter_movies/models/movie_popular/movie_popular.dart';
+import 'package:flutter_movies/models/movie_trending/movie_trending_model.dart';
 import 'package:retrofit/http.dart';
 part 'api.g.dart';
 
@@ -28,5 +29,8 @@ abstract class ApiClient {
   Future<MoviePopular> getListMovieFopular();
 
   @GET('movie/now_playing?api_key=a7e38c80a0efc42034dfb5c8b95a72cb')
-  Future<MovieNowPlaying> getListMoviePlaying();
+  Future<MovieNowPlayingModel> getListMoviePlaying();
+
+  @GET('trending/all/day?api_key=a7e38c80a0efc42034dfb5c8b95a72cb')
+  Future<MovieTrendingModel> getListMovieTrending();
 }
