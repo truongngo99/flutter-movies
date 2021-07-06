@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_movies/models/movie_popular/movie_popular.dart';
+
 import 'package:flutter_movies/models/movie_trending/movie_trending_model.dart';
 
 abstract class MovieTrendingState extends Equatable {

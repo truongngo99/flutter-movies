@@ -1,11 +1,11 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_movies/bloc/login/login_bloc.dart';
 import 'package:flutter_movies/bloc/movie_trending/movie_trending_bloc.dart';
 import 'package:flutter_movies/bloc/now_playing/now_playing_bloc.dart';
 import 'package:flutter_movies/bloc/popular/popular_bloc.dart';
-import 'package:flutter_movies/network/api.dart';
+import 'package:flutter_movies/bloc/top_rate/top_rate_bloc.dart';
+import 'package:flutter_movies/bloc/upcoming/upcoming_bloc.dart';
 
 import 'package:flutter_movies/view/home.dart';
 
@@ -40,6 +40,9 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<NowPlayingBloc>(create: (context) => NowPlayingBloc()),
         BlocProvider<MovieTrendingBloc>(
             create: (context) => MovieTrendingBloc()),
+        BlocProvider<MovieTopRateBloc>(create: (context) => MovieTopRateBloc()),
+        BlocProvider<MovieUpcomingBloc>(
+            create: (context) => MovieUpcomingBloc()),
       ],
       child: TeqCoreApp(
         debugShowCheckedModeBanner: false,

@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_movies/bloc/login/login_event.dart';
 import 'package:flutter_movies/bloc/login/login_state.dart';
 
-import 'package:flutter_movies/models/authentication/request_token.dart';
-
 import 'package:flutter_movies/network/api.dart';
 import 'package:flutter_movies/utils/preference_util.dart';
 

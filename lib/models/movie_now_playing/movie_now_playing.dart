@@ -1,5 +1,5 @@
 import 'package:flutter_movies/models/movie_now_playing/list_movie_nowplaying.dart';
-import 'package:flutter_movies/models/movie_popular/list_movie.dart';
+
 import 'package:json_annotation/json_annotation.dart';
 part 'movie_now_playing.g.dart';
 

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movies/models/movie_popular/movie_popular.dart';
+import 'package:flutter_movies/models/movie_trending/movie_trending_model.dart';
 
-class PopularWidget extends StatelessWidget {
-  final MoviePopular? listResult;
-  PopularWidget({
+class TopRateMovieWidget extends StatelessWidget {
+  final MovieTrendingModel? listResult;
+  TopRateMovieWidget({
     this.listResult,
     Key? key,
   }) : super(key: key);
