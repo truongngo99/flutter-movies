@@ -91,11 +91,9 @@ class _DetailScreenState extends State<DetailScreen> {
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
                               Container(
-                                child: RatingBar.builder(
-                                  initialRating: 3,
-                                  minRating: 1,
+                                child: RatingBarIndicator(
+                                  rating: widget.voteAverage! / 2,
                                   direction: Axis.horizontal,
-                                  allowHalfRating: true,
                                   itemCount: 5,
                                   itemSize: 20,
                                   unratedColor: Colors.grey,
@@ -105,9 +103,6 @@ class _DetailScreenState extends State<DetailScreen> {
                                     Icons.star,
                                     color: Colors.amber,
                                   ),
-                                  onRatingUpdate: (rating) {
-                                    print(rating);
-                                  },
                                 ),
                               ),
                               Text(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movies/models/movie_now_playing/movie_now_playing.dart';
+import 'package:flutter_movies/view/screen/detail_screen.dart';
 
 class NowPlayingWidget extends StatelessWidget {
   final MovieNowPlayingModel listResult;
@@ -19,7 +20,20 @@ class NowPlayingWidget extends StatelessWidget {
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {
-                print('click');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => DetailScreen(
+                              urlBackdrop:
+                                  listResult.results[index].backdrop_path,
+                              urlPoster: listResult.results[index].poster_path,
+                              title: listResult.results[index].title,
+                              releaseDate:
+                                  listResult.results[index].release_date,
+                              voteAverage:
+                                  listResult.results[index].vote_average,
+                              voteCount: listResult.results[index].vote_count,
+                            )));
               },
               child: Card(
                   child: Container(

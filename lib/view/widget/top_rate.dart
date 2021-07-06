@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movies/models/movie_popular/movie_popular.dart';
 import 'package:flutter_movies/models/movie_trending/movie_trending_model.dart';
+import 'package:flutter_movies/view/screen/detail_screen.dart';
 
 class TopRateMovieWidget extends StatelessWidget {
   final MovieTrendingModel? listResult;
@@ -20,7 +21,20 @@ class TopRateMovieWidget extends StatelessWidget {
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {
-                print('click');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => DetailScreen(
+                              urlBackdrop:
+                                  listResult!.results[index].backdrop_path,
+                              urlPoster: listResult!.results[index].poster_path,
+                              title: listResult!.results[index].title,
+                              releaseDate:
+                                  listResult!.results[index].release_date,
+                              voteAverage:
+                                  listResult!.results[index].vote_average,
+                              voteCount: listResult!.results[index].vote_count,
+                            )));
               },
               child: Card(
                   child: Container(
