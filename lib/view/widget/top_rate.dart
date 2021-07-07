@@ -34,6 +34,8 @@ class TopRateMovieWidget extends StatelessWidget {
                               voteAverage:
                                   listResult!.results[index].vote_average,
                               voteCount: listResult!.results[index].vote_count,
+                              overView: listResult!.results[index].overview,
+                              id: listResult!.results[index].id,
                             )));
               },
               child: Card(

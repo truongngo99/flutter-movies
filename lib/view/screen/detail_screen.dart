@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_movies/bloc/get_poster/get_poster_bloc.dart';
+import 'package:flutter_movies/bloc/get_poster/get_poster_event.dart';
+import 'package:flutter_movies/bloc/get_poster/get_poster_state.dart';
+import 'package:flutter_movies/bloc/review_movie/reivew_movie_state.dart';
+import 'package:flutter_movies/bloc/review_movie/review_movie.evetn.dart';
+import 'package:flutter_movies/bloc/review_movie/review_movie_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class DetailScreen extends StatefulWidget {
@@ -8,6 +15,8 @@ class DetailScreen extends StatefulWidget {
   final String? releaseDate;
   final double? voteAverage;
   final int? voteCount;
+  final String? overView;
+  final int id;
   DetailScreen(
       {Key? key,
       this.urlBackdrop,
@@ -15,7 +24,9 @@ class DetailScreen extends StatefulWidget {
       this.title,
       this.releaseDate,
       this.voteAverage,
-      this.voteCount})
+      this.voteCount,
+      this.overView,
+      required this.id})
       : super(key: key);
 
   @override
@@ -24,30 +35,37 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<ReviewMovieBloc>(context)
+        .add(ReviewMovieEventStart(movieId: widget.id.toString()));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.grey, //change your color here
-        ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
-      body: Container(
-        width: double.infinity,
-        padding: EdgeInsets.only(top: 22),
-        child: Column(
-          children: [
-            Expanded(
-              flex: 1,
-              child: Stack(
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
+            SliverAppBar(
+              expandedHeight: 200,
+              backgroundColor: Colors.transparent,
+              collapsedHeight: 110,
+              floating: false,
+              pinned: true,
+              flexibleSpace: Stack(
                 children: [
-                  Image.network(
-                    'https://image.tmdb.org/t/p/original${widget.urlBackdrop}??'
-                    '',
-                    fit: BoxFit.fill,
-                    width: double.infinity,
+                  InkWell(
+                    onTap: () {
+                      print('click urlBackDrop');
+                    },
+                    child: Image.network(
+                      'https://image.tmdb.org/t/p/original${widget.urlBackdrop}??'
+                      '',
+                      fit: BoxFit.fill,
+                      width: double.infinity,
+                    ),
                   ),
                   Positioned(
                     bottom: 5,
@@ -58,8 +76,14 @@ class _DetailScreenState extends State<DetailScreen> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Image.network(
-                            'https://image.tmdb.org/t/p/original${widget.urlPoster}',
+                          InkWell(
+                            onTap: () {
+                              print('click urlPoster');
+                            },
+                            child: Image.network(
+                              'https://image.tmdb.org/t/p/original${widget.urlPoster}',
+                              fit: BoxFit.fill,
+                            ),
                           ),
                           SizedBox(
                             width: 5,
@@ -130,11 +154,148 @@ class _DetailScreenState extends State<DetailScreen> {
                 ],
               ),
             ),
-            Expanded(
-              flex: 2,
-              child: Container(),
+          ];
+        },
+        body: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.all(8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Overview',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text('     ${widget.overView}',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      fontStyle: FontStyle.italic,
+                    )),
+                // Text('Poster'),
+                // Container(
+                //   height: 200,
+                //   width: double.infinity,
+                //   child: BlocBuilder<GetPosterBloc, GetPosterState>(
+                //     builder: (context, GetPosterState state) {
+                //       if (state is GetPosterStateSucess) {
+                //         return ListView.builder(
+                //             scrollDirection: Axis.horizontal,
+                //             itemCount: state.imageModel!.posters!.length,
+                //             itemBuilder: (context, index) {
+                //               return Image.network(
+                //                   'https://image.tmdb.org/t/p/original${state.imageModel!.posters![index].file_path}');
+                //             });
+                //       }
+                //       return CircularProgressIndicator();
+                //     },
+                //   ),
+                // ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Reviews',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                BlocBuilder<ReviewMovieBloc, ReviewMovieState>(
+                    builder: (context, ReviewMovieState state) {
+                  if (state is ReviewMovieStateSucess) {
+                    String imageDefault =
+                        'https://st.quantrimang.com/photos/image/2017/04/08/anh-dai-dien-FB-200.jpg';
+                    return Container(
+                      height: 300,
+                      child: ListView.builder(
+                          itemCount: state.reviewMovieModel!.results!.length,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              padding: EdgeInsets.only(left: 5),
+                              height: 250,
+                              width: double.infinity,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CircleAvatar(
+                                    backgroundImage: NetworkImage(
+                                        '${state.reviewMovieModel!.results![index].author_details!.avatar_path ?? '$imageDefault'}'),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Container(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          '${state.reviewMovieModel!.results![index].author}'
+                                              .toUpperCase(),
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.access_alarm,
+                                              size: 15,
+                                              color: Colors.grey[500],
+                                            ),
+                                            SizedBox(
+                                              width: 4,
+                                            ),
+                                            Text(
+                                              '${state.reviewMovieModel!.results![index].updated_at}',
+                                              style: TextStyle(
+                                                color: Colors.grey[500],
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              75,
+                                          child: Text(
+                                            '${state.reviewMovieModel!.results![index].content}',
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 10,
+                                            style: TextStyle(
+                                              // color: Colors.grey[500],
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+                    );
+                  }
+                  return CircularProgressIndicator();
+                }),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
