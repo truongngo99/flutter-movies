@@ -38,37 +38,46 @@ class MovieUpcomingWidget extends StatelessWidget {
                               id: listResult!.results[index].id,
                             )));
               },
-              child: Card(
-                  child: Container(
-                width: 150,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(5),
-                        topRight: Radius.circular(5),
-                      ),
-                      child: Image.network(
-                        'https://image.tmdb.org/t/p/original${listResult!.results[index].poster_path}',
-                        fit: BoxFit.fitWidth,
-                        height: 150,
-                        width: 150,
+                    Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      elevation: 0.0,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          'https://image.tmdb.org/t/p/original${listResult!.results[index].poster_path ?? ''}',
+                          fit: BoxFit.fill,
+                          height: 160,
+                          width: 130,
+                        ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(2),
+                      width: 130,
+                      height: 30,
                       child: Text(
                         '${listResult!.results[index].title}',
                         style: TextStyle(
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.white,
                         ),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
+                        textAlign: TextAlign.start,
                       ),
-                    )
+                    ),
                   ],
                 ),
-              )),
+              ),
             );
           }),
     );

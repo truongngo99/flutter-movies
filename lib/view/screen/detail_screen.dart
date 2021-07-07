@@ -6,7 +6,10 @@ import 'package:flutter_movies/bloc/get_poster/get_poster_state.dart';
 import 'package:flutter_movies/bloc/review_movie/reivew_movie_state.dart';
 import 'package:flutter_movies/bloc/review_movie/review_movie.evetn.dart';
 import 'package:flutter_movies/bloc/review_movie/review_movie_bloc.dart';
+import 'package:flutter_movies/view/screen/backdrop_screen.dart';
+import 'package:flutter_movies/view/screen/poster_screen.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:teq_flutter_core/teq_flutter_core.dart';
 
 class DetailScreen extends StatefulWidget {
   final String? urlBackdrop;
@@ -58,7 +61,14 @@ class _DetailScreenState extends State<DetailScreen> {
                 children: [
                   InkWell(
                     onTap: () {
-                      print('click urlBackDrop');
+                      BlocProvider.of<GetPosterBloc>(context).add(
+                          GetPosterEventStart(movieId: widget.id.toString()));
+                      transferToNewScreen(
+                        context,
+                        BackDropScreen(
+                          title: widget.title ?? '',
+                        ),
+                      );
                     },
                     child: Image.network(
                       'https://image.tmdb.org/t/p/original${widget.urlBackdrop}??'
@@ -77,8 +87,16 @@ class _DetailScreenState extends State<DetailScreen> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           InkWell(
-                            onTap: () {
-                              print('click urlPoster');
+                            onTap: () async {
+                              BlocProvider.of<GetPosterBloc>(context).add(
+                                  GetPosterEventStart(
+                                      movieId: widget.id.toString()));
+                              transferToNewScreen(
+                                context,
+                                PosterScreen(
+                                  title: widget.title ?? '',
+                                ),
+                              );
                             },
                             child: Image.network(
                               'https://image.tmdb.org/t/p/original${widget.urlPoster}',

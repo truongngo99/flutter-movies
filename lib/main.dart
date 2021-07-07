@@ -55,7 +55,7 @@ class _MyAppState extends State<MyApp> {
       child: TeqCoreApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.red,
+          primarySwatch: Colors.blueGrey,
         ),
         enableConfigView: true,
         home: HomeScreen(),
