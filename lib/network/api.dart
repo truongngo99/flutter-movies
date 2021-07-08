@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_movies/data/response/cast_crew/cast_crew.dart';
 import 'package:flutter_movies/models/authentication/create_session.dart';
 
 import 'package:flutter_movies/models/authentication/login_body.dart';
@@ -47,4 +48,7 @@ abstract class ApiClient {
 
   @GET('movie/{movie_id}/reviews?api_key=a7e38c80a0efc42034dfb5c8b95a72cb')
   Future<ReviewMovieModel> getReviewMovie(@Path('movie_id') String movieId);
+
+  @GET('movie/{movie_id}/credits?api_key=a7e38c80a0efc42034dfb5c8b95a72cb')
+  Future<CastCrew> getCastCrewMovie(@Path('movie_id') String movieId);
 }

@@ -6,6 +6,9 @@ import 'package:flutter_movies/bloc/get_poster/get_poster_state.dart';
 import 'package:flutter_movies/bloc/review_movie/reivew_movie_state.dart';
 import 'package:flutter_movies/bloc/review_movie/review_movie.evetn.dart';
 import 'package:flutter_movies/bloc/review_movie/review_movie_bloc.dart';
+import 'package:flutter_movies/view/cast_crew/cast_crew_bloc.dart';
+import 'package:flutter_movies/view/cast_crew/cast_crew_event.dart';
+import 'package:flutter_movies/view/cast_crew/cast_crew_state.dart';
 import 'package:flutter_movies/view/screen/backdrop_screen.dart';
 import 'package:flutter_movies/view/screen/poster_screen.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -42,17 +45,20 @@ class _DetailScreenState extends State<DetailScreen> {
     super.initState();
     BlocProvider.of<ReviewMovieBloc>(context)
         .add(ReviewMovieEventStart(movieId: widget.id.toString()));
+    BlocProvider.of<CastCewBloc>(context)
+        .add(CastCrewEventStart(movieId: widget.id.toString()));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff1C262f),
       extendBodyBehindAppBar: true,
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
             SliverAppBar(
-              expandedHeight: 200,
+              expandedHeight: 230,
               backgroundColor: Colors.transparent,
               collapsedHeight: 110,
               floating: false,
@@ -75,6 +81,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       '',
                       fit: BoxFit.fill,
                       width: double.infinity,
+                      height: 250,
                     ),
                   ),
                   Positioned(
@@ -117,8 +124,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                   maxLines: 5,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                      color: Colors.grey[800],
-                                      fontSize: 16,
+                                      color: Colors.white,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.w500),
                                 ),
                               ),
@@ -183,35 +190,128 @@ class _DetailScreenState extends State<DetailScreen> {
                 Text(
                   'Overview',
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 22,
                     fontWeight: FontWeight.bold,
+                    color: Colors.white.withOpacity(0.7),
                   ),
                 ),
                 Text('     ${widget.overView}',
                     style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
+                      fontSize: 17,
+                      color: Colors.white.withOpacity(0.7),
                       fontStyle: FontStyle.italic,
                     )),
-                // Text('Poster'),
-                // Container(
-                //   height: 200,
-                //   width: double.infinity,
-                //   child: BlocBuilder<GetPosterBloc, GetPosterState>(
-                //     builder: (context, GetPosterState state) {
-                //       if (state is GetPosterStateSucess) {
-                //         return ListView.builder(
-                //             scrollDirection: Axis.horizontal,
-                //             itemCount: state.imageModel!.posters!.length,
-                //             itemBuilder: (context, index) {
-                //               return Image.network(
-                //                   'https://image.tmdb.org/t/p/original${state.imageModel!.posters![index].file_path}');
-                //             });
-                //       }
-                //       return CircularProgressIndicator();
-                //     },
-                //   ),
-                // ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    'Cast',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white.withOpacity(0.7),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(
+                    top: 10,
+                    left: 15,
+                  ),
+                  height: 100,
+                  child: BlocBuilder<CastCewBloc, CastCrewState>(
+                    builder: (context, CastCrewState state) {
+                      if (state is CastCrewStateSuccess) {
+                        return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: state.castCrew!.cast!.length,
+                            itemBuilder: (context, index) {
+                              String imageDefault =
+                                  'https://st.quantrimang.com/photos/image/2017/04/08/anh-dai-dien-FB-200.jpg';
+                              return Container(
+                                margin: EdgeInsets.only(right: 15),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 70,
+                                      width: 70,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: NetworkImage(
+                                              'https://image.tmdb.org/t/p/original${state.castCrew!.cast![index].profile_path}'),
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      '${state.castCrew!.cast![index].name}',
+                                      style: TextStyle(
+                                          color: Colors.white.withOpacity(0.7)),
+                                    )
+                                    // Image.network(
+                                    //     'https://image.tmdb.org/t/p/original${state.castCrew!.cast![index].profile_path}'),
+                                  ],
+                                ),
+                              );
+                            });
+                      }
+                      return Center(child: CircularProgressIndicator());
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    'Crew',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white.withOpacity(0.7),
+                    ),
+                  ),
+                ),
+                Container(
+                  height: 200,
+                  width: double.infinity,
+                  child: BlocBuilder<CastCewBloc, CastCrewState>(
+                    builder: (context, CastCrewState state) {
+                      if (state is CastCrewStateSuccess) {
+                        return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: state.castCrew!.crew!.length,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                margin: EdgeInsets.only(right: 15),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      height: 70,
+                                      width: 70,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: NetworkImage(
+                                              'https://image.tmdb.org/t/p/original${state.castCrew!.crew![index].profile_path}'),
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      '${state.castCrew!.crew![index].name}',
+                                      style: TextStyle(
+                                          color: Colors.white.withOpacity(0.7)),
+                                    )
+                                    // Image.network(
+                                    //     'https://image.tmdb.org/t/p/original${state.castCrew!.cast![index].profile_path}'),
+                                  ],
+                                ),
+                              );
+                            });
+                      }
+                      return CircularProgressIndicator();
+                    },
+                  ),
+                ),
                 SizedBox(
                   height: 10,
                 ),
@@ -235,6 +335,9 @@ class _DetailScreenState extends State<DetailScreen> {
                       child: ListView.builder(
                           itemCount: state.reviewMovieModel!.results!.length,
                           itemBuilder: (context, index) {
+                            var urlAvatarPath = state.reviewMovieModel!
+                                .results![index].author_details!.avatar_path;
+                            urlAvatarPath = urlAvatarPath!.substring(1);
                             return Container(
                               padding: EdgeInsets.only(left: 5),
                               height: 250,
@@ -243,8 +346,8 @@ class _DetailScreenState extends State<DetailScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   CircleAvatar(
-                                    backgroundImage: NetworkImage(
-                                        '${state.reviewMovieModel!.results![index].author_details!.avatar_path ?? '$imageDefault'}'),
+                                    backgroundImage:
+                                        NetworkImage('$urlAvatarPath'),
                                   ),
                                   SizedBox(
                                     width: 10,

@@ -10,6 +10,7 @@ import 'package:flutter_movies/bloc/review_movie/review_movie_bloc.dart';
 import 'package:flutter_movies/bloc/top_rate/top_rate_bloc.dart';
 import 'package:flutter_movies/bloc/upcoming/upcoming_bloc.dart';
 import 'package:flutter_movies/network/api.dart';
+import 'package:flutter_movies/view/cast_crew/cast_crew_bloc.dart';
 
 import 'package:flutter_movies/view/home.dart';
 
@@ -17,9 +18,9 @@ import 'package:teq_flutter_core/teq_flutter_core.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  // ApiClient(Dio())
-  //     .getReviewMovie('460465')
-  //     .then((value) => print(value.toJson()));
+  ApiClient(Dio())
+      .getReviewMovie('460465')
+      .then((value) => print(value.results![1].author_details!.avatar_path));
   runApp(MyApp());
 }
 
@@ -51,6 +52,7 @@ class _MyAppState extends State<MyApp> {
             create: (context) => MovieUpcomingBloc()),
         BlocProvider<GetPosterBloc>(create: (context) => GetPosterBloc()),
         BlocProvider<ReviewMovieBloc>(create: (context) => ReviewMovieBloc()),
+        BlocProvider<CastCewBloc>(create: (context) => CastCewBloc()),
       ],
       child: TeqCoreApp(
         debugShowCheckedModeBanner: false,
