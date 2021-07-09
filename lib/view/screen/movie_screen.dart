@@ -52,7 +52,7 @@ class _MovieScreenState extends State<MovieScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Color(0xff1C262f),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -69,13 +69,14 @@ class _MovieScreenState extends State<MovieScreen> {
                   return CircularProgressIndicator();
                 }),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(left: 12.0),
                   child: Text(
                     'Popular',
                     style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
-                        color: Colors.redAccent),
+                        color: Colors.orange),
+                    textAlign: TextAlign.start,
                   ),
                 ),
                 BlocBuilder<PopularBloc, PopularState>(
@@ -92,9 +93,10 @@ class _MovieScreenState extends State<MovieScreen> {
                   child: Text(
                     'Now Playing',
                     style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
-                        color: Colors.redAccent),
+                        color: Colors.orange),
+                    textAlign: TextAlign.start,
                   ),
                 ),
                 BlocBuilder<NowPlayingBloc, NowPlayingState>(
@@ -111,9 +113,10 @@ class _MovieScreenState extends State<MovieScreen> {
                   child: Text(
                     'Top Rate',
                     style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
-                        color: Colors.redAccent),
+                        color: Colors.orange),
+                    textAlign: TextAlign.start,
                   ),
                 ),
                 BlocBuilder<MovieTopRateBloc, MovieTopRateState>(
@@ -130,9 +133,10 @@ class _MovieScreenState extends State<MovieScreen> {
                   child: Text(
                     'Upcoming movie list',
                     style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
-                        color: Colors.redAccent),
+                        color: Colors.orange),
+                    textAlign: TextAlign.start,
                   ),
                 ),
                 BlocBuilder<MovieUpcomingBloc, MovieUpcomingState>(
