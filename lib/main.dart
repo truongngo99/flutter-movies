@@ -21,8 +21,8 @@ import 'package:teq_flutter_core/teq_flutter_core.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   ApiClient(Dio())
-      .getTrailerMovie('724089')
-      .then((value) => print(value.results![1].name));
+      .getProfileCasterMovie('136347')
+      .then((value) => print(value.profile_path));
 
   runApp(MyApp());
 }
@@ -57,7 +57,6 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<ReviewMovieBloc>(create: (context) => ReviewMovieBloc()),
         BlocProvider<CastCewBloc>(create: (context) => CastCewBloc()),
         BlocProvider<TrailerBloc>(create: (context) => TrailerBloc()),
-        BlocProvider<CasterBloc>(create: (context) => CasterBloc()),
       ],
       child: TeqCoreApp(
         debugShowCheckedModeBanner: false,

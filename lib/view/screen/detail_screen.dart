@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_movies/bloc/get_poster/get_poster_bloc.dart';
-import 'package:flutter_movies/bloc/get_poster/get_poster_event.dart';
-import 'package:flutter_movies/bloc/get_poster/get_poster_state.dart';
+
 import 'package:flutter_movies/bloc/review_movie/reivew_movie_state.dart';
 import 'package:flutter_movies/bloc/review_movie/review_movie.evetn.dart';
 import 'package:flutter_movies/bloc/review_movie/review_movie_bloc.dart';
+import 'package:flutter_movies/view/backdrop/backdrop_screen.dart';
 import 'package:flutter_movies/view/cast_crew/cast_crew_bloc.dart';
 import 'package:flutter_movies/view/cast_crew/cast_crew_event.dart';
 import 'package:flutter_movies/view/cast_crew/cast_crew_state.dart';
-import 'package:flutter_movies/view/caster/caster_bloc.dart';
-import 'package:flutter_movies/view/caster/caster_event.dart';
+
 import 'package:flutter_movies/view/caster/caster_screen.dart';
-import 'package:flutter_movies/view/screen/backdrop_screen.dart';
-import 'package:flutter_movies/view/screen/poster_screen.dart';
+import 'package:flutter_movies/view/poster/poster_bloc.dart';
+import 'package:flutter_movies/view/poster/poster_event.dart';
+import 'package:flutter_movies/view/poster/poster_screen.dart';
+
 import 'package:flutter_movies/view/trailer/trailer_bloc.dart';
 import 'package:flutter_movies/view/trailer/trailer_event.dart';
 import 'package:flutter_movies/view/trailer/trailer_state.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:teq_flutter_core/teq_flutter_core.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class DetailScreen extends StatefulWidget {
   final String? urlBackdrop;
@@ -76,12 +75,13 @@ class _DetailScreenState extends State<DetailScreen> {
                 children: [
                   InkWell(
                     onTap: () {
-                      BlocProvider.of<GetPosterBloc>(context).add(
-                          GetPosterEventStart(movieId: widget.id.toString()));
+                      // BlocProvider.of<GetPosterBloc>(context).add(
+                      //     GetPosterEventStart(movieId: widget.id.toString()));
                       transferToNewScreen(
                         context,
-                        BackDropScreen(
+                        BackdropScreen(
                           title: widget.title ?? '',
+                          id: widget.id.toString(),
                         ),
                       );
                     },
@@ -104,13 +104,14 @@ class _DetailScreenState extends State<DetailScreen> {
                         children: [
                           InkWell(
                             onTap: () async {
-                              BlocProvider.of<GetPosterBloc>(context).add(
-                                  GetPosterEventStart(
-                                      movieId: widget.id.toString()));
+                              // BlocProvider.of<GetPosterBloc>(context).add(
+                              //     GetPosterEventStart(
+                              //         movieId: widget.id.toString()));
                               transferToNewScreen(
                                 context,
                                 PosterScreen(
                                   title: widget.title ?? '',
+                                  id: widget.id.toString(),
                                 ),
                               );
                             },
@@ -236,16 +237,24 @@ class _DetailScreenState extends State<DetailScreen> {
                             itemBuilder: (context, index) {
                               String imageDefault =
                                   'https://st.quantrimang.com/photos/image/2017/04/08/anh-dai-dien-FB-200.jpg';
+                              String? avatarCaster =
+                                  state.castCrew!.cast![index].profile_path;
+                              String? avatarLink =
+                                  'https://image.tmdb.org/t/p/original$avatarCaster';
                               return InkWell(
                                 onTap: () {
-                                  BlocProvider.of<CasterBloc>(context).add(
-                                      CasterClickEvent(state
-                                          .castCrew!.cast![index].id
-                                          .toString()));
+                                  // BlocProvider.of<CasterBloc>(context).add(
+                                  //     CasterClickEvent(state
+                                  //         .castCrew!.cast![index].id
+                                  //         .toString()));
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (_) => CasterScreen()));
+                                          builder: (_) => CasterScreen(
+                                                id: state
+                                                    .castCrew!.cast![index].id
+                                                    .toString(),
+                                              )));
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(right: 15),
@@ -259,7 +268,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                           image: DecorationImage(
                                             fit: BoxFit.cover,
                                             image: NetworkImage(
-                                                'https://image.tmdb.org/t/p/original${state.castCrew!.cast![index].profile_path}'),
+                                                avatarCaster == null
+                                                    ? imageDefault
+                                                    : avatarLink),
                                           ),
                                         ),
                                       ),
@@ -304,6 +315,12 @@ class _DetailScreenState extends State<DetailScreen> {
                             scrollDirection: Axis.horizontal,
                             itemCount: state.castCrew!.crew!.length,
                             itemBuilder: (context, index) {
+                              String imageDefault =
+                                  'https://st.quantrimang.com/photos/image/2017/04/08/anh-dai-dien-FB-200.jpg';
+                              String? avatarCrew =
+                                  state.castCrew!.crew![index].profile_path;
+                              String? avatarLink =
+                                  'https://image.tmdb.org/t/p/original$avatarCrew';
                               return Container(
                                 margin: EdgeInsets.only(right: 15),
                                 child: Column(
@@ -315,8 +332,9 @@ class _DetailScreenState extends State<DetailScreen> {
                                         shape: BoxShape.circle,
                                         image: DecorationImage(
                                           fit: BoxFit.cover,
-                                          image: NetworkImage(
-                                              'https://image.tmdb.org/t/p/original${state.castCrew!.crew![index].profile_path}'),
+                                          image: NetworkImage(avatarCrew == null
+                                              ? imageDefault
+                                              : avatarLink),
                                         ),
                                       ),
                                     ),

@@ -1,28 +1,39 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_movies/bloc/get_poster/get_poster_bloc.dart';
-import 'package:flutter_movies/bloc/get_poster/get_poster_state.dart';
+import 'package:flutter_movies/view/poster/poster_bloc.dart';
+import 'package:flutter_movies/view/poster/poster_event.dart';
+import 'package:flutter_movies/view/poster/poster_sate.dart';
+import 'package:teq_flutter_core/teq_flutter_core.dart';
 
 class PosterScreen extends StatefulWidget {
+  final String id;
   final String title;
-  PosterScreen({Key? key, required this.title}) : super(key: key);
+  PosterScreen({Key? key, required this.id, required this.title})
+      : super(key: key);
 
   @override
   _PosterScreenState createState() => _PosterScreenState();
 }
 
-class _PosterScreenState extends State<PosterScreen> {
+class _PosterScreenState extends BaseBlocState<PosterScreen> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) =>
+      BaseBlocBuilder<GetPosterStateSucess>(bloc as GetPosterBloc, _buildBody);
+
+  @override
+  BaseBloc createBloc() =>
+      GetPosterBloc()..add(GetPosterEventStart(movieId: widget.id));
+
+  Widget _buildBody(BuildContext context, GetPosterStateSucess state) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Poster ${widget.title}'),
+          title: Text(widget.title),
         ),
-        body: BlocBuilder<GetPosterBloc, GetPosterState>(
-          builder: (context, GetPosterState state) {
-            if (state is GetPosterStateSucess) {
-              return Center(
+        body: state.isLoading
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Center(
                 child: CarouselSlider(
                   items: state.imageModel!.posters!.map((e) {
                     return Builder(
@@ -43,10 +54,6 @@ class _PosterScreenState extends State<PosterScreen> {
                     enlargeCenterPage: true,
                   ),
                 ),
-              );
-            }
-            return CircularProgressIndicator();
-          },
-        ));
+              ));
   }
 }

@@ -1,28 +1,39 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_movies/bloc/get_poster/get_poster_bloc.dart';
-import 'package:flutter_movies/bloc/get_poster/get_poster_state.dart';
+import 'package:flutter_movies/view/poster/poster_bloc.dart';
+import 'package:flutter_movies/view/poster/poster_event.dart';
+import 'package:flutter_movies/view/poster/poster_sate.dart';
+import 'package:teq_flutter_core/teq_flutter_core.dart';
 
-class BackDropScreen extends StatefulWidget {
+class BackdropScreen extends StatefulWidget {
+  final String id;
   final String title;
-  BackDropScreen({Key? key, required this.title}) : super(key: key);
+  BackdropScreen({Key? key, required this.id, required this.title})
+      : super(key: key);
 
   @override
-  _BackDropScreenState createState() => _BackDropScreenState();
+  _BackdropScreenState createState() => _BackdropScreenState();
 }
 
-class _BackDropScreenState extends State<BackDropScreen> {
+class _BackdropScreenState extends BaseBlocState<BackdropScreen> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) =>
+      BaseBlocBuilder<GetPosterStateSucess>(bloc as GetPosterBloc, _buildBody);
+
+  @override
+  BaseBloc createBloc() =>
+      GetPosterBloc()..add(GetPosterEventStart(movieId: widget.id));
+
+  Widget _buildBody(BuildContext context, GetPosterStateSucess state) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('BackDrop ${widget.title}'),
+          title: Text(widget.title),
         ),
-        body: BlocBuilder<GetPosterBloc, GetPosterState>(
-          builder: (context, GetPosterState state) {
-            if (state is GetPosterStateSucess) {
-              return Center(
+        body: state.isLoading
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Center(
                 child: CarouselSlider(
                   items: state.imageModel!.backdrops!.map((e) {
                     return Builder(
@@ -43,10 +54,6 @@ class _BackDropScreenState extends State<BackDropScreen> {
                     enlargeCenterPage: true,
                   ),
                 ),
-              );
-            }
-            return CircularProgressIndicator();
-          },
-        ));
+              ));
   }
 }
