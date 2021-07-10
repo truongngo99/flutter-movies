@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_movies/bloc/get_poster/get_poster_bloc.dart';
-import 'package:flutter_movies/bloc/login/login_bloc.dart';
+
 import 'package:flutter_movies/bloc/movie_trending/movie_trending_bloc.dart';
 import 'package:flutter_movies/bloc/now_playing/now_playing_bloc.dart';
 import 'package:flutter_movies/bloc/popular/popular_bloc.dart';
@@ -14,15 +14,13 @@ import 'package:flutter_movies/view/cast_crew/cast_crew_bloc.dart';
 import 'package:flutter_movies/view/caster/caster_bloc.dart';
 
 import 'package:flutter_movies/view/home.dart';
+import 'package:flutter_movies/view/splash/splash_screen.dart';
 import 'package:flutter_movies/view/trailer/trailer_bloc.dart';
 
 import 'package:teq_flutter_core/teq_flutter_core.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  ApiClient(Dio())
-      .getProfileCasterMovie('136347')
-      .then((value) => print(value.profile_path));
 
   runApp(MyApp());
 }
@@ -45,7 +43,6 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<LoginBloc>(create: (context) => LoginBloc()),
         BlocProvider<PopularBloc>(create: (context) => PopularBloc()),
         BlocProvider<NowPlayingBloc>(create: (context) => NowPlayingBloc()),
         BlocProvider<MovieTrendingBloc>(
@@ -64,7 +61,7 @@ class _MyAppState extends State<MyApp> {
           primarySwatch: Colors.blueGrey,
         ),
         enableConfigView: true,
-        home: HomeScreen(),
+        home: SplashScreen(),
         width: double.infinity,
         height: double.infinity,
       ),

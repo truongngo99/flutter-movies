@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_movies/data/response/authentication/create_session.dart';
+import 'package:flutter_movies/data/response/authentication/login_body.dart';
+import 'package:flutter_movies/data/response/authentication/request_token.dart';
 import 'package:flutter_movies/data/response/cast_crew/cast_crew.dart';
 import 'package:flutter_movies/data/response/person_id/person_id.dart';
 import 'package:flutter_movies/data/response/trailer/trailer.dart';
-import 'package:flutter_movies/models/authentication/create_session.dart';
 
-import 'package:flutter_movies/models/authentication/login_body.dart';
-import 'package:flutter_movies/models/authentication/request_token.dart';
 import 'package:flutter_movies/models/image/image_model.dart';
 import 'package:flutter_movies/models/movie_now_playing/movie_now_playing.dart';
 
