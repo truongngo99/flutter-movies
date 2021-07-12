@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_movies/data/post/api.dart';
 import 'package:flutter_movies/view/login/login_screen.dart';
 
 import 'package:flutter_movies/view/splash/splash_bloc.dart';
@@ -16,14 +18,18 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends BaseBlocState<SplashScreen> {
   @override
-  Widget build(BuildContext context) => BaseBlocConsumer<SplashStateSuccess>(
-        bloc as SplashBoc,
-        _buildBody,
-        _buildListen,
-      );
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+        providers: [BlocProvider(create: (context) => bloc as SplashBoc)],
+        child: BaseBlocConsumer<SplashStateSuccess>(
+          bloc as SplashBoc,
+          _buildBody,
+          _buildListen,
+        ));
+  }
 
   @override
-  BaseBloc createBloc() => SplashBoc()..add(SplashEvent());
+  BaseBloc createBloc() => SplashBoc(context.read<Api>())..add(SplashEvent());
   _buildListen(BuildContext context, SplashStateSuccess state) {
     state.isLoading
         ? true

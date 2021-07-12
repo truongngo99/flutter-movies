@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_movies/data/post/api.dart';
 import 'package:flutter_movies/data/response/authentication/login_body.dart';
 import 'package:flutter_movies/utils/preference_util.dart';
 import 'package:flutter_movies/view/home.dart';
@@ -22,11 +24,17 @@ class _LoginScreenState extends BaseBlocState<LoginScreen> {
   TextEditingController _passwordCtrl = TextEditingController();
   //bool isLoading = false;
   @override
-  Widget build(BuildContext context) => BaseBlocConsumer<LoginStateSuccess>(
-      bloc as LoginBloc, _buildBody, _buildListen);
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => bloc as LoginBloc),
+        ],
+        child: BaseBlocConsumer<LoginStateSuccess>(
+            bloc as LoginBloc, _buildBody, _buildListen));
+  }
 
   @override
-  BaseBloc createBloc() => LoginBloc();
+  BaseBloc createBloc() => LoginBloc(context.read<Api>());
   _buildListen(BuildContext context, LoginStateSuccess state) {
     if (state.isError) {
       ScaffoldMessenger.of(context).showSnackBar(

@@ -1,5 +1,4 @@
-import 'package:flutter_movies/models/image/backdrop_model.dart';
-import 'package:flutter_movies/models/image/image_model.dart';
+import 'package:flutter_movies/data/response/image/backdrop_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'image_model.g.dart';
 

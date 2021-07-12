@@ -145,18 +145,17 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<ImageModel> getPosterMovie(movieId) async {
+  Future<dynamic> getPosterMovie(movieId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<
-        ImageModel>(Options(
+    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
             method: 'GET', headers: <String, dynamic>{}, extra: _extra)
         .compose(_dio.options,
             'movie/$movieId/images?api_key=a7e38c80a0efc42034dfb5c8b95a72cb',
             queryParameters: queryParameters, data: _data)
         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ImageModel.fromJson(_result.data!);
+    final value = _result.data;
     return value;
   }
 

@@ -1,4 +1,5 @@
-import 'package:flutter_movies/models/image/image_model.dart';
+import 'package:flutter_movies/data/response/image/image_model.dart';
+
 import 'package:teq_flutter_core/teq_flutter_core.dart';
 
 class GetPosterStateSucess extends BaseState {

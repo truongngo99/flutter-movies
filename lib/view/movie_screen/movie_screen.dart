@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_movies/data/post/api.dart';
 import 'package:flutter_movies/view/movie_screen/movie_screen_bloc.dart';
 import 'package:flutter_movies/view/movie_screen/movie_screen_event.dart';
 import 'package:flutter_movies/view/movie_screen/movie_screen_state.dart';
@@ -18,11 +20,16 @@ class MovieScreen extends StatefulWidget {
 
 class _MovieScreenState extends BaseBlocState<MovieScreen> {
   @override
-  Widget build(BuildContext context) =>
-      BaseBlocBuilder<MovieScreenState>(bloc as MovieScreenBloc, _buildBody);
+  Widget build(BuildContext context) => MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => bloc as MovieScreenBloc),
+          ],
+          child: BaseBlocBuilder<MovieScreenState>(
+              bloc as MovieScreenBloc, _buildBody));
 
   @override
-  BaseBloc createBloc() => MovieScreenBloc()..add(MovieScreenEvent());
+  BaseBloc createBloc() =>
+      MovieScreenBloc(context.read<Api>())..add(MovieScreenEvent());
 
   Widget _buildBody(BuildContext context, MovieScreenState state) {
     return SafeArea(

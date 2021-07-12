@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_movies/data/post/api.dart';
+import 'package:flutter_movies/data/post/api_impl.dart';
 
 import 'package:flutter_movies/view/splash/splash_screen.dart';
 import 'package:flutter_movies/view/trailer/trailer_bloc.dart';
@@ -25,14 +27,13 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     currentEnvironment = Environment.DEV;
+    TeqNetwork.init(ApiUrl(), httpError: HttpError());
   }
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<TrailerBloc>(create: (context) => TrailerBloc()),
-      ],
+    return MultiRepositoryProvider(
+      providers: [RepositoryProvider<Api>(create: (context) => ApiImpl())],
       child: TeqCoreApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

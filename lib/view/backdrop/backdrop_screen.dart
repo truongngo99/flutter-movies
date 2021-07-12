@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_movies/data/post/api.dart';
 import 'package:flutter_movies/view/poster_detail/poster_bloc.dart';
 import 'package:flutter_movies/view/poster_detail/poster_event.dart';
 import 'package:flutter_movies/view/poster_detail/poster_sate.dart';
@@ -17,12 +19,18 @@ class BackdropScreen extends StatefulWidget {
 
 class _BackdropScreenState extends BaseBlocState<BackdropScreen> {
   @override
-  Widget build(BuildContext context) =>
-      BaseBlocBuilder<GetPosterStateSucess>(bloc as GetPosterBloc, _buildBody);
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => bloc as GetPosterBloc),
+        ],
+        child: BaseBlocBuilder<GetPosterStateSucess>(
+            bloc as GetPosterBloc, _buildBody));
+  }
 
   @override
-  BaseBloc createBloc() =>
-      GetPosterBloc()..add(GetPosterEventStart(movieId: widget.id));
+  BaseBloc createBloc() => GetPosterBloc(context.read<Api>())
+    ..add(GetPosterEventStart(movieId: widget.id));
 
   Widget _buildBody(BuildContext context, GetPosterStateSucess state) {
     return Scaffold(

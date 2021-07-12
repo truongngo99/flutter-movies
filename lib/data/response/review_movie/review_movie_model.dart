@@ -1,4 +1,4 @@
-import 'package:flutter_movies/models/review_movie/result_review_model.dart';
+import 'package:flutter_movies/data/response/review_movie/result_review_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'review_movie_model.g.dart';
 
