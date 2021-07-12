@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_movies/view/screen/movie_screen.dart';
+import 'package:flutter_movies/view/movie_screen/movie_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);

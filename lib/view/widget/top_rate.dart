@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_movies/models/movie_popular/movie_popular.dart';
-import 'package:flutter_movies/models/movie_trending/movie_trending_model.dart';
-import 'package:flutter_movies/view/screen/detail_screen.dart';
+import 'package:flutter_movies/data/response/movie/movie_model.dart';
+
+import 'package:flutter_movies/view/movie_detail/movie_detail_screen.dart';
 
 class TopRateMovieWidget extends StatelessWidget {
-  final MovieTrendingModel? listResult;
+  final MovieModel? listResult;
   TopRateMovieWidget({
     this.listResult,
     Key? key,
@@ -13,11 +13,11 @@ class TopRateMovieWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 210,
+      height: 230,
       width: MediaQuery.of(context).size.width,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: listResult!.results.length,
+          itemCount: listResult?.results.length,
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {

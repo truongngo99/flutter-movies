@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_movies/view/poster/poster_bloc.dart';
-import 'package:flutter_movies/view/poster/poster_event.dart';
-import 'package:flutter_movies/view/poster/poster_sate.dart';
+import 'package:flutter_movies/view/poster_detail/poster_bloc.dart';
+import 'package:flutter_movies/view/poster_detail/poster_event.dart';
+import 'package:flutter_movies/view/poster_detail/poster_sate.dart';
 import 'package:teq_flutter_core/teq_flutter_core.dart';
 
 class BackdropScreen extends StatefulWidget {

@@ -7,14 +7,15 @@ part of 'cast_crew.dart';
 // **************************************************************************
 
 CastCrew _$CastCrewFromJson(Map<String, dynamic> json) {
-  return CastCrew()
-    ..id = json['id'] as int?
-    ..cast = (json['cast'] as List<dynamic>?)
-        ?.map((e) => Cast.fromJson(e as Map<String, dynamic>))
-        .toList()
-    ..crew = (json['crew'] as List<dynamic>?)
-        ?.map((e) => Crew.fromJson(e as Map<String, dynamic>))
-        .toList();
+  return CastCrew(
+    cast: (json['cast'] as List<dynamic>)
+        .map((e) => Cast.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    crew: (json['crew'] as List<dynamic>)
+        .map((e) => Crew.fromJson(e as Map<String, dynamic>))
+        .toList(),
+    id: json['id'] as int?,
+  );
 }
 
 Map<String, dynamic> _$CastCrewToJson(CastCrew instance) => <String, dynamic>{

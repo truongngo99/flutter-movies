@@ -6,7 +6,6 @@ import 'package:flutter_movies/view/home.dart';
 import 'package:flutter_movies/view/login/login_bloc.dart';
 import 'package:flutter_movies/view/login/login_event.dart';
 import 'package:flutter_movies/view/login/login_state.dart';
-import 'package:flutter_movies/view/screen/movie_screen.dart';
 
 import 'package:teq_flutter_core/teq_flutter_core.dart';
 
@@ -21,18 +20,15 @@ class _LoginScreenState extends BaseBlocState<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController _usernameCtrl = TextEditingController();
   TextEditingController _passwordCtrl = TextEditingController();
-  bool isLoading = false;
+  //bool isLoading = false;
   @override
-  Widget build(BuildContext context) =>
-      BaseBlocConsumer<LoginState>(bloc as LoginBloc, _buildBody, _buildListen);
+  Widget build(BuildContext context) => BaseBlocConsumer<LoginStateSuccess>(
+      bloc as LoginBloc, _buildBody, _buildListen);
 
   @override
   BaseBloc createBloc() => LoginBloc();
-  _buildListen(BuildContext context, LoginState state) {
-    if (state is LoginStateLoading) {
-      isLoading = true;
-    }
-    if (state is LoginStateFailed) {
+  _buildListen(BuildContext context, LoginStateSuccess state) {
+    if (state.isError) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Login Failed'),
@@ -41,13 +37,13 @@ class _LoginScreenState extends BaseBlocState<LoginScreen> {
           ),
         ),
       );
-      isLoading = false;
-    } else if (state is LoginStateSuccess) {
+    } else if (state.requestToken != null &&
+        state.requestToken!.success == true) {
       return transferToNewScreen(context, HomeScreen());
     }
   }
 
-  Widget _buildBody(BuildContext context, LoginState state) {
+  Widget _buildBody(BuildContext context, LoginStateSuccess state) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -118,7 +114,7 @@ class _LoginScreenState extends BaseBlocState<LoginScreen> {
                       addEvent(LoginButtonEvent(loginBody: body));
                     }
                   },
-                  child: isLoading
+                  child: state.isLoading
                       ? CircularProgressIndicator()
                       : Text(
                           'Login',

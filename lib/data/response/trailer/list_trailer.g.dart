@@ -12,7 +12,7 @@ ResultTrailers _$ResultTrailersFromJson(Map<String, dynamic> json) {
     json['iso_3166_1'] as String,
     json['iso_639_1'] as String,
     json['key'] as String,
-    json['name'] as String,
+    json['name'] as String?,
     json['site'] as String,
     json['size'] as int,
     json['type'] as String,

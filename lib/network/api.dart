@@ -3,14 +3,12 @@ import 'package:flutter_movies/data/response/authentication/create_session.dart'
 import 'package:flutter_movies/data/response/authentication/login_body.dart';
 import 'package:flutter_movies/data/response/authentication/request_token.dart';
 import 'package:flutter_movies/data/response/cast_crew/cast_crew.dart';
+import 'package:flutter_movies/data/response/movie/movie_model.dart';
 import 'package:flutter_movies/data/response/person_id/person_id.dart';
 import 'package:flutter_movies/data/response/trailer/trailer.dart';
 
 import 'package:flutter_movies/models/image/image_model.dart';
-import 'package:flutter_movies/models/movie_now_playing/movie_now_playing.dart';
 
-import 'package:flutter_movies/models/movie_popular/movie_popular.dart';
-import 'package:flutter_movies/models/movie_trending/movie_trending_model.dart';
 import 'package:flutter_movies/models/review_movie/review_movie_model.dart';
 import 'package:retrofit/http.dart';
 part 'api.g.dart';
@@ -31,19 +29,19 @@ abstract class ApiClient {
       @Query('request_token') String requestToken);
 
   @GET('movie/popular?api_key=a7e38c80a0efc42034dfb5c8b95a72cb')
-  Future<MoviePopular> getListMovieFopular();
+  Future<MovieModel> getListMovieFopular();
 
   @GET('movie/now_playing?api_key=a7e38c80a0efc42034dfb5c8b95a72cb')
-  Future<MovieNowPlayingModel> getListMoviePlaying();
+  Future<MovieModel> getListMoviePlaying();
 
   @GET('trending/all/day?api_key=a7e38c80a0efc42034dfb5c8b95a72cb')
-  Future<MovieTrendingModel> getListMovieTrending();
+  Future<MovieModel> getListMovieTrending();
 
   @GET('movie/top_rated?api_key=a7e38c80a0efc42034dfb5c8b95a72cb')
-  Future<MovieTrendingModel> getListMovieTopRate();
+  Future<MovieModel> getListMovieTopRate();
 
   @GET('movie/upcoming?api_key=a7e38c80a0efc42034dfb5c8b95a72cb')
-  Future<MovieNowPlayingModel> getListMovieUpcoming();
+  Future<MovieModel> getListMovieUpcoming();
 
   @GET('movie/{movie_id}/images?api_key=a7e38c80a0efc42034dfb5c8b95a72cb')
   Future<ImageModel> getPosterMovie(@Path('movie_id') String movieId);

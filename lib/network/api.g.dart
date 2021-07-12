@@ -65,82 +65,82 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<MoviePopular> getListMovieFopular() async {
+  Future<MovieModel> getListMovieFopular() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<MoviePopular>(
+        _setStreamType<MovieModel>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options,
                     'movie/popular?api_key=a7e38c80a0efc42034dfb5c8b95a72cb',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MoviePopular.fromJson(_result.data!);
+    final value = MovieModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<MovieNowPlayingModel> getListMoviePlaying() async {
+  Future<MovieModel> getListMoviePlaying() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<MovieNowPlayingModel>(Options(
+        _setStreamType<MovieModel>(Options(
                 method: 'GET', headers: <String, dynamic>{}, extra: _extra)
             .compose(_dio.options,
                 'movie/now_playing?api_key=a7e38c80a0efc42034dfb5c8b95a72cb',
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MovieNowPlayingModel.fromJson(_result.data!);
+    final value = MovieModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<MovieTrendingModel> getListMovieTrending() async {
+  Future<MovieModel> getListMovieTrending() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<MovieTrendingModel>(
+        _setStreamType<MovieModel>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options,
                     'trending/all/day?api_key=a7e38c80a0efc42034dfb5c8b95a72cb',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MovieTrendingModel.fromJson(_result.data!);
+    final value = MovieModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<MovieTrendingModel> getListMovieTopRate() async {
+  Future<MovieModel> getListMovieTopRate() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<MovieTrendingModel>(
+        _setStreamType<MovieModel>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options,
                     'movie/top_rated?api_key=a7e38c80a0efc42034dfb5c8b95a72cb',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MovieTrendingModel.fromJson(_result.data!);
+    final value = MovieModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<MovieNowPlayingModel> getListMovieUpcoming() async {
+  Future<MovieModel> getListMovieUpcoming() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<MovieNowPlayingModel>(
+        _setStreamType<MovieModel>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options,
                     'movie/upcoming?api_key=a7e38c80a0efc42034dfb5c8b95a72cb',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MovieNowPlayingModel.fromJson(_result.data!);
+    final value = MovieModel.fromJson(_result.data!);
     return value;
   }
 

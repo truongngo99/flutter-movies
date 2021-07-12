@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_movies/models/movie_popular/movie_popular.dart';
-import 'package:flutter_movies/view/screen/detail_screen.dart';
+import 'package:flutter_movies/data/response/movie/movie_model.dart';
+
+import 'package:flutter_movies/view/movie_detail/movie_detail_screen.dart';
 
 class PopularWidget extends StatelessWidget {
-  final MoviePopular? listResult;
+  final MovieModel? listMoviePopular;
   PopularWidget({
-    this.listResult,
+    this.listMoviePopular,
     Key? key,
   }) : super(key: key);
 
@@ -18,7 +19,7 @@ class PopularWidget extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: listResult!.results.length,
+            itemCount: listMoviePopular?.results.length,
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
@@ -26,19 +27,20 @@ class PopularWidget extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (_) => DetailScreen(
-                                urlBackdrop:
-                                    listResult!.results[index].backdrop_path,
-                                urlPoster:
-                                    listResult!.results[index].poster_path,
-                                title: listResult!.results[index].title,
-                                releaseDate:
-                                    listResult!.results[index].release_date,
-                                voteAverage:
-                                    listResult!.results[index].vote_average,
+                                urlBackdrop: listMoviePopular!
+                                    .results[index].backdrop_path,
+                                urlPoster: listMoviePopular!
+                                    .results[index].poster_path,
+                                title: listMoviePopular!.results[index].title,
+                                releaseDate: listMoviePopular!
+                                    .results[index].release_date,
+                                voteAverage: listMoviePopular!
+                                    .results[index].vote_average,
                                 voteCount:
-                                    listResult!.results[index].vote_count,
-                                overView: listResult!.results[index].overview,
-                                id: listResult!.results[index].id,
+                                    listMoviePopular!.results[index].vote_count,
+                                overView:
+                                    listMoviePopular!.results[index].overview,
+                                id: listMoviePopular!.results[index].id,
                               )));
                 },
                 child: Padding(
@@ -52,7 +54,7 @@ class PopularWidget extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.network(
-                            'https://image.tmdb.org/t/p/original${listResult!.results[index].poster_path ?? ''}',
+                            'https://image.tmdb.org/t/p/original${listMoviePopular!.results[index].poster_path ?? ''}',
                             fit: BoxFit.fill,
                             height: 160,
                             width: 130,
@@ -66,7 +68,7 @@ class PopularWidget extends StatelessWidget {
                         padding: EdgeInsets.all(2),
                         width: 130,
                         child: Text(
-                          '${listResult!.results[index].title}',
+                          '${listMoviePopular!.results[index].title}',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
