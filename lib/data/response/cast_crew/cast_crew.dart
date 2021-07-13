@@ -6,8 +6,8 @@ part 'cast_crew.g.dart';
 @JsonSerializable()
 class CastCrew {
   int? id;
-  List<Cast> cast;
-  List<Crew> crew;
+  List<Cast>? cast;
+  List<Crew>? crew;
 
   CastCrew({required this.cast, required this.crew, this.id});
   factory CastCrew.fromJson(Map<String, dynamic> json) =>

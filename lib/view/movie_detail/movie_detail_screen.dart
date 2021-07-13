@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_movies/data/post/api.dart';
 import 'package:flutter_movies/view/backdrop/backdrop_screen.dart';
 import 'package:flutter_movies/view/caster_detail/caster_screen.dart';
 import 'package:flutter_movies/view/movie_detail/movie_detail_bloc.dart';
@@ -36,12 +38,16 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends BaseBlocState<DetailScreen> {
   @override
-  Widget build(BuildContext context) =>
-      BaseBlocBuilder<MovieDetailState>(bloc as MovieDetailBloc, _buildBody);
+  Widget build(BuildContext context) => MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => bloc as MovieDetailBloc),
+          ],
+          child: BaseBlocBuilder<MovieDetailState>(
+              bloc as MovieDetailBloc, _buildBody));
 
   @override
-  BaseBloc createBloc() =>
-      MovieDetailBloc()..add(MovieDetailClickEvent(id: widget.id.toString()));
+  BaseBloc createBloc() => MovieDetailBloc(context.read<Api>())
+    ..add(MovieDetailClickEvent(id: widget.id.toString()));
 
   Widget _buildBody(BuildContext context, MovieDetailState state) {
     return Scaffold(
@@ -215,12 +221,12 @@ class _DetailScreenState extends BaseBlocState<DetailScreen> {
                         height: 100,
                         child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: state.castCrewModel?.cast.length,
+                            itemCount: state.castCrewModel?.cast!.length,
                             itemBuilder: (context, index) {
                               String imageDefault =
                                   'https://st.quantrimang.com/photos/image/2017/04/08/anh-dai-dien-FB-200.jpg';
-                              String? avatarCaster =
-                                  state.castCrewModel?.cast[index].profile_path;
+                              String? avatarCaster = state
+                                  .castCrewModel?.cast![index].profile_path;
                               String? avatarLink =
                                   'https://image.tmdb.org/t/p/original$avatarCaster';
                               return InkWell(
@@ -234,7 +240,7 @@ class _DetailScreenState extends BaseBlocState<DetailScreen> {
                                       MaterialPageRoute(
                                           builder: (_) => CasterScreen(
                                                 id: state.castCrewModel!
-                                                    .cast[index].id
+                                                    .cast![index].id
                                                     .toString(),
                                               )));
                                 },
@@ -257,7 +263,7 @@ class _DetailScreenState extends BaseBlocState<DetailScreen> {
                                         ),
                                       ),
                                       Text(
-                                        '${state.castCrewModel?.cast[index].name}',
+                                        '${state.castCrewModel?.cast![index].name}',
                                         style: TextStyle(
                                             color:
                                                 Colors.white.withOpacity(0.7)),
@@ -288,12 +294,12 @@ class _DetailScreenState extends BaseBlocState<DetailScreen> {
                           width: double.infinity,
                           child: ListView.builder(
                               scrollDirection: Axis.horizontal,
-                              itemCount: state.castCrewModel?.crew.length,
+                              itemCount: state.castCrewModel?.crew!.length,
                               itemBuilder: (context, index) {
                                 String imageDefault =
                                     'https://st.quantrimang.com/photos/image/2017/04/08/anh-dai-dien-FB-200.jpg';
                                 String? avatarCrew = state
-                                    .castCrewModel?.crew[index].profile_path;
+                                    .castCrewModel?.crew![index].profile_path;
                                 String? avatarLink =
                                     'https://image.tmdb.org/t/p/original$avatarCrew';
                                 return Container(
@@ -315,7 +321,7 @@ class _DetailScreenState extends BaseBlocState<DetailScreen> {
                                         ),
                                       ),
                                       Text(
-                                        '${state.castCrewModel?.crew[index].name}',
+                                        '${state.castCrewModel?.crew![index].name}',
                                         style: TextStyle(
                                             color:
                                                 Colors.white.withOpacity(0.7)),

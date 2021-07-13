@@ -8,11 +8,11 @@ part of 'cast_crew.dart';
 
 CastCrew _$CastCrewFromJson(Map<String, dynamic> json) {
   return CastCrew(
-    cast: (json['cast'] as List<dynamic>)
-        .map((e) => Cast.fromJson(e as Map<String, dynamic>))
+    cast: (json['cast'] as List<dynamic>?)
+        ?.map((e) => Cast.fromJson(e as Map<String, dynamic>))
         .toList(),
-    crew: (json['crew'] as List<dynamic>)
-        .map((e) => Crew.fromJson(e as Map<String, dynamic>))
+    crew: (json['crew'] as List<dynamic>?)
+        ?.map((e) => Crew.fromJson(e as Map<String, dynamic>))
         .toList(),
     id: json['id'] as int?,
   );

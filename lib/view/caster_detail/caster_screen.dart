@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_movies/data/post/api.dart';
 import 'package:flutter_movies/view/caster_detail/caster_bloc.dart';
 import 'package:flutter_movies/view/caster_detail/caster_event.dart';
 import 'package:flutter_movies/view/caster_detail/caster_state.dart';
@@ -15,11 +16,16 @@ class CasterScreen extends StatefulWidget {
 
 class _CasterScreenState extends BaseBlocState<CasterScreen> {
   @override
-  Widget build(BuildContext context) =>
-      BaseBlocBuilder<CasterStateSuccess>(bloc as CasterBloc, _buildBody);
+  Widget build(BuildContext context) => MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => bloc as CasterBloc),
+          ],
+          child: BaseBlocBuilder<CasterStateSuccess>(
+              bloc as CasterBloc, _buildBody));
 
   @override
-  BaseBloc createBloc() => CasterBloc()..add(CasterClickEvent(widget.id));
+  BaseBloc createBloc() =>
+      CasterBloc(context.read<Api>())..add(CasterClickEvent(widget.id));
 
   Widget _buildBody(BuildContext context, CasterStateSuccess state) {
     return Scaffold(

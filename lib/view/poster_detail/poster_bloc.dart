@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_movies/data/post/api.dart';
-import 'package:flutter_movies/network/api.dart';
+
 import 'package:flutter_movies/view/poster_detail/poster_event.dart';
 import 'package:flutter_movies/view/poster_detail/poster_sate.dart';
 import 'package:teq_flutter_core/teq_flutter_core.dart';

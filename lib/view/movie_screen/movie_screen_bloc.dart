@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_movies/data/post/api.dart';
-import 'package:flutter_movies/network/api.dart';
+
 import 'package:flutter_movies/view/movie_screen/movie_screen_event.dart';
 import 'package:flutter_movies/view/movie_screen/movie_screen_state.dart';
 import 'package:teq_flutter_core/teq_flutter_core.dart';

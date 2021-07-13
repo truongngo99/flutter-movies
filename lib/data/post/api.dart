@@ -1,8 +1,12 @@
 import 'package:flutter_movies/data/response/authentication/create_session.dart';
 import 'package:flutter_movies/data/response/authentication/login_body.dart';
 import 'package:flutter_movies/data/response/authentication/request_token.dart';
+import 'package:flutter_movies/data/response/cast_crew/cast_crew.dart';
 import 'package:flutter_movies/data/response/image/image_model.dart';
 import 'package:flutter_movies/data/response/movie/movie_model.dart';
+import 'package:flutter_movies/data/response/person_id/person_id.dart';
+import 'package:flutter_movies/data/response/review_movie/review_movie_model.dart';
+import 'package:flutter_movies/data/response/trailer/trailer.dart';
 import 'package:teq_flutter_core/teq_flutter_core.dart';
 
 abstract class Api {
@@ -41,17 +45,21 @@ abstract class Api {
       GET('movie/{movie_id}/images?api_key=a7e38c80a0efc42034dfb5c8b95a72cb');
   Future<ImageModel> getPosterMovie(String movieId);
 
-  // @GET('movie/{movie_id}/reviews?api_key=a7e38c80a0efc42034dfb5c8b95a72cb')
-  // Future<ReviewMovieModel> getReviewMovie(@Path('movie_id') String movieId);
+  Method get getReview =>
+      GET('movie/{movie_id}/reviews?api_key=a7e38c80a0efc42034dfb5c8b95a72cb');
+  Future<ReviewMovieModel> getReviewMovie(String movieId);
 
-  // @GET('movie/{movie_id}/credits?api_key=a7e38c80a0efc42034dfb5c8b95a72cb')
-  // Future<CastCrew> getCastCrewMovie(@Path('movie_id') String movieId);
+  Method get getCastCrew =>
+      GET('movie/{movie_id}/credits?api_key=a7e38c80a0efc42034dfb5c8b95a72cb');
+  Future<CastCrew> getCastCrewMovie(String movieId);
 
-  // @GET('movie/{movie_id}/videos?api_key=a7e38c80a0efc42034dfb5c8b95a72cb')
-  // Future<Trailer> getTrailerMovie(@Path('movie_id') String movieId);
+  Method get getTrailer =>
+      GET('movie/{movie_id}/videos?api_key=a7e38c80a0efc42034dfb5c8b95a72cb');
+  Future<Trailer> getTrailerMovie(String movieId);
 
-  // @GET('/person/{castId}?api_key=a7e38c80a0efc42034dfb5c8b95a72cb')
-  // Future<PersonCaster> getProfileCasterMovie(@Path('castId') String castId);
+  Method get getProfile =>
+      GET('/person/{castId}?api_key=a7e38c80a0efc42034dfb5c8b95a72cb');
+  Future<PersonCaster> getProfileCasterMovie(String castId);
 }
 
 class ApiUrl extends BaseUrl {
