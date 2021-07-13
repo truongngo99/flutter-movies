@@ -7,7 +7,7 @@ class ResultTrailers {
   String iso_639_1;
   String iso_3166_1;
   String key;
-  String name;
+  String? name;
   String site;
   int size;
   String type;

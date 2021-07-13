@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_movies/models/movie_now_playing/movie_now_playing.dart';
-import 'package:flutter_movies/models/movie_popular/movie_popular.dart';
-import 'package:flutter_movies/view/screen/detail_screen.dart';
+import 'package:flutter_movies/data/response/movie/movie_model.dart';
+
+import 'package:flutter_movies/view/movie_detail/movie_detail_screen.dart';
 
 class MovieUpcomingWidget extends StatelessWidget {
-  final MovieNowPlayingModel? listResult;
+  final MovieModel? listResult;
   MovieUpcomingWidget({
     this.listResult,
     Key? key,
@@ -13,11 +13,11 @@ class MovieUpcomingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 210,
-      width: MediaQuery.of(context).size.width,
+      height: 230,
+      width: double.infinity,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: listResult!.results.length,
+          itemCount: listResult?.results.length,
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {

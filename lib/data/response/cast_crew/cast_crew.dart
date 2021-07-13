@@ -9,7 +9,7 @@ class CastCrew {
   List<Cast>? cast;
   List<Crew>? crew;
 
-  CastCrew();
+  CastCrew({required this.cast, required this.crew, this.id});
   factory CastCrew.fromJson(Map<String, dynamic> json) =>
       _$CastCrewFromJson(json);
   Map<String, dynamic> toJson() => _$CastCrewToJson(this);

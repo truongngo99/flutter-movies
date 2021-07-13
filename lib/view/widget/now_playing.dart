@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_movies/models/movie_now_playing/movie_now_playing.dart';
-import 'package:flutter_movies/view/screen/detail_screen.dart';
+import 'package:flutter_movies/data/response/movie/movie_model.dart';
+
+import 'package:flutter_movies/view/movie_detail/movie_detail_screen.dart';
 
 class NowPlayingWidget extends StatelessWidget {
-  final MovieNowPlayingModel listResult;
+  final MovieModel? listResult;
   NowPlayingWidget({
     required this.listResult,
     Key? key,
@@ -12,11 +13,11 @@ class NowPlayingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 210,
+      height: 230,
       width: MediaQuery.of(context).size.width,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: listResult.results.length,
+          itemCount: listResult?.results.length,
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {
@@ -25,16 +26,16 @@ class NowPlayingWidget extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (_) => DetailScreen(
                               urlBackdrop:
-                                  listResult.results[index].backdrop_path,
-                              urlPoster: listResult.results[index].poster_path,
-                              title: listResult.results[index].title,
+                                  listResult!.results[index].backdrop_path,
+                              urlPoster: listResult!.results[index].poster_path,
+                              title: listResult!.results[index].title,
                               releaseDate:
-                                  listResult.results[index].release_date,
+                                  listResult!.results[index].release_date,
                               voteAverage:
-                                  listResult.results[index].vote_average,
-                              voteCount: listResult.results[index].vote_count,
-                              overView: listResult.results[index].overview,
-                              id: listResult.results[index].id,
+                                  listResult!.results[index].vote_average,
+                              voteCount: listResult!.results[index].vote_count,
+                              overView: listResult!.results[index].overview,
+                              id: listResult!.results[index].id,
                             )));
               },
               child: Padding(
@@ -48,7 +49,7 @@ class NowPlayingWidget extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.network(
-                          'https://image.tmdb.org/t/p/original${listResult.results[index].poster_path ?? ''}',
+                          'https://image.tmdb.org/t/p/original${listResult!.results[index].poster_path ?? ''}',
                           fit: BoxFit.fill,
                           height: 160,
                           width: 130,
@@ -63,7 +64,7 @@ class NowPlayingWidget extends StatelessWidget {
                       width: 130,
                       height: 30,
                       child: Text(
-                        '${listResult.results[index].title}',
+                        '${listResult!.results[index].title}',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,

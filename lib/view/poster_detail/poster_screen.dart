@@ -7,23 +7,21 @@ import 'package:flutter_movies/view/poster_detail/poster_event.dart';
 import 'package:flutter_movies/view/poster_detail/poster_sate.dart';
 import 'package:teq_flutter_core/teq_flutter_core.dart';
 
-class BackdropScreen extends StatefulWidget {
+class PosterScreen extends StatefulWidget {
   final String id;
   final String title;
-  BackdropScreen({Key? key, required this.id, required this.title})
+  PosterScreen({Key? key, required this.id, required this.title})
       : super(key: key);
 
   @override
-  _BackdropScreenState createState() => _BackdropScreenState();
+  _PosterScreenState createState() => _PosterScreenState();
 }
 
-class _BackdropScreenState extends BaseBlocState<BackdropScreen> {
+class _PosterScreenState extends BaseBlocState<PosterScreen> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (context) => bloc as GetPosterBloc),
-        ],
+        providers: [BlocProvider(create: (context) => bloc as GetPosterBloc)],
         child: BaseBlocBuilder<GetPosterStateSucess>(
             bloc as GetPosterBloc, _buildBody));
   }
@@ -34,7 +32,7 @@ class _BackdropScreenState extends BaseBlocState<BackdropScreen> {
 
   Widget _buildBody(BuildContext context, GetPosterStateSucess state) {
     int _current = 0;
-    final CarouselController _controller = CarouselController();
+    CarouselController carouselController = CarouselController();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -45,26 +43,23 @@ class _BackdropScreenState extends BaseBlocState<BackdropScreen> {
             )
           : Column(
               children: [
-                Expanded(
+                Center(
                   child: CarouselSlider(
-                    items: state.imageModel?.backdrops?.map((e) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return Container(
-                              width: MediaQuery.of(context).size.width,
+                    carouselController: carouselController,
+                    items: state.imageModel?.posters?.map((e) {
+                      return Container(
+                          width: MediaQuery.of(context).size.width,
 
-                              //margin: EdgeInsets.symmetric(horizontal: 5.0),
-                              child: Image.network(
-                                  'https://image.tmdb.org/t/p/original${e.file_path ?? ''}'));
-                        },
-                      );
+                          //margin: EdgeInsets.symmetric(horizontal: 5.0),
+                          child: Image.network(
+                              'https://image.tmdb.org/t/p/original${e.file_path ?? ''}'));
                     }).toList(),
                     options: CarouselOptions(
-                        autoPlay: true,
+                        autoPlay: false,
                         aspectRatio: 1.0,
                         height: 500,
                         enlargeCenterPage: true,
-                        onPageChanged: (index, reason) {
+                        onPageChanged: (index, other) {
                           setState(() {
                             _current = index;
                           });
@@ -81,10 +76,10 @@ class _BackdropScreenState extends BaseBlocState<BackdropScreen> {
                           padding: const EdgeInsets.only(right: 8.0),
                           child: InkWell(
                             onTap: () {
-                              _controller.animateToPage(index);
+                              carouselController.animateToPage(index);
                             },
                             child: Image.network(
-                                'https://image.tmdb.org/t/p/original${state.imageModel!.backdrops![index].file_path}'),
+                                'https://image.tmdb.org/t/p/original${state.imageModel!.posters![index].file_path}'),
                           ),
                         );
                       }),
