@@ -46,7 +46,7 @@ class _PosterScreenState extends BaseBlocState<PosterScreen> {
                 Center(
                   child: CarouselSlider(
                     carouselController: carouselController,
-                    items: state.imageModel!.posters!.map((e) {
+                    items: state.imageModel?.posters?.map((e) {
                       return Container(
                           width: MediaQuery.of(context).size.width,
 
@@ -64,50 +64,8 @@ class _PosterScreenState extends BaseBlocState<PosterScreen> {
                             _current = index;
                           });
                         }),
-                    //carouselController: ,
                   ),
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: <Widget>[
-                //     Flexible(
-                //       child: ElevatedButton(
-                //         onPressed: () => carouselController.previousPage(),
-                //         child: Text('←'),
-                //       ),
-                //     ),
-                //     Flexible(
-                //       child: ElevatedButton(
-                //         onPressed: () => carouselController.nextPage(),
-                //         child: Text('→'),
-                //       ),
-                //     ),
-                //     // ...Iterable<int>.generate(imgList.length).map(
-                //     //   (int pageIndex) => Flexible(
-                //     //     child: ElevatedButton(
-                //     //       onPressed: () => _controller.animateToPage(pageIndex),
-                //     //       child: Text("$pageIndex"),
-                //     //     ),
-                //     //   ),
-                //     // ),
-                //   ],
-                // )
-                // Row(
-                //   children: [
-                //     ...Iterable<int>.generate(state.imageModel!.posters!.length)
-                //         .map(
-                //       (int pageIndex) => InkWell(
-                //         onTap: () =>
-                //             carouselController.animateToPage(pageIndex),
-                //         child: Image.network(
-                //           'https://image.tmdb.org/t/p/original${state.imageModel!.posters![pageIndex].file_path}',
-                //           height: 100,
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
-
                 Container(
                   height: 100,
                   child: ListView.builder(

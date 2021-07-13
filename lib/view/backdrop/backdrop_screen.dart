@@ -33,35 +33,64 @@ class _BackdropScreenState extends BaseBlocState<BackdropScreen> {
     ..add(GetPosterEventStart(movieId: widget.id));
 
   Widget _buildBody(BuildContext context, GetPosterStateSucess state) {
+    int _current = 0;
+    final CarouselController _controller = CarouselController();
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: state.isLoading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : Center(
-                child: CarouselSlider(
-                  items: state.imageModel!.backdrops!.map((e) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                            width: MediaQuery.of(context).size.width,
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: state.isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : Column(
+              children: [
+                Expanded(
+                  child: CarouselSlider(
+                    items: state.imageModel?.backdrops?.map((e) {
+                      return Builder(
+                        builder: (BuildContext context) {
+                          return Container(
+                              width: MediaQuery.of(context).size.width,
 
-                            //margin: EdgeInsets.symmetric(horizontal: 5.0),
-                            child: Image.network(
-                                'https://image.tmdb.org/t/p/original${e.file_path ?? ''}'));
-                      },
-                    );
-                  }).toList(),
-                  options: CarouselOptions(
-                    autoPlay: true,
-                    aspectRatio: 1.0,
-                    height: 500,
-                    enlargeCenterPage: true,
+                              //margin: EdgeInsets.symmetric(horizontal: 5.0),
+                              child: Image.network(
+                                  'https://image.tmdb.org/t/p/original${e.file_path ?? ''}'));
+                        },
+                      );
+                    }).toList(),
+                    options: CarouselOptions(
+                        autoPlay: true,
+                        aspectRatio: 1.0,
+                        height: 500,
+                        enlargeCenterPage: true,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            _current = index;
+                          });
+                        }),
                   ),
                 ),
-              ));
+                Container(
+                  height: 100,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 15,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: InkWell(
+                            onTap: () {
+                              _controller.animateToPage(index);
+                            },
+                            child: Image.network(
+                                'https://image.tmdb.org/t/p/original${state.imageModel!.backdrops![index].file_path}'),
+                          ),
+                        );
+                      }),
+                ),
+              ],
+            ),
+    );
   }
 }

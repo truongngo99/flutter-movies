@@ -18,7 +18,7 @@ class CasterBloc extends BaseBloc<CasterStateSuccess> {
         print(result.profile_path);
         yield state.copyWith(personCaster: result, isLoading: false);
       } catch (e) {
-        print(e.toString());
+        yield state.copyWith(isLoading: true);
       }
     }
   }

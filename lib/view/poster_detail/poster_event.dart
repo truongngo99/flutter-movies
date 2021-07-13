@@ -5,5 +5,5 @@ class GetPosterEventStart extends BaseEvent {
   GetPosterEventStart({required this.movieId});
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [movieId];
 }

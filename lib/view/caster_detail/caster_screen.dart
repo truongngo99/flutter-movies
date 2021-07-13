@@ -41,7 +41,7 @@ class _CasterScreenState extends BaseBlocState<CasterScreen> {
                     return [
                       SliverAppBar(
                         expandedHeight: 200,
-                        floating: false,
+                        floating: true,
                         pinned: true,
                         collapsedHeight: 100,
                         flexibleSpace: Container(
@@ -55,13 +55,13 @@ class _CasterScreenState extends BaseBlocState<CasterScreen> {
                                 child: CircleAvatar(
                                   radius: 60,
                                   backgroundImage: NetworkImage(
-                                      'https://image.tmdb.org/t/p/original${state.personCaster!.profile_path}'),
+                                      'https://image.tmdb.org/t/p/original${state.personCaster?.profile_path}'),
                                 ),
                               ),
                               Positioned(
                                 bottom: 40,
                                 child: Text(
-                                  '${state.personCaster!.name}',
+                                  '${state.personCaster?.name}',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
@@ -73,7 +73,7 @@ class _CasterScreenState extends BaseBlocState<CasterScreen> {
                                 child: Padding(
                                   padding: const EdgeInsets.only(bottom: 0),
                                   child: Text(
-                                    '${state.personCaster!.place_of_birth}',
+                                    '${state.personCaster?.place_of_birth}',
                                     style: TextStyle(
                                       color: Colors.white.withOpacity(0.7),
                                       fontSize: 16,
@@ -126,7 +126,7 @@ class _CasterScreenState extends BaseBlocState<CasterScreen> {
                                       height: 10,
                                     ),
                                     Text(
-                                      '${state.personCaster!.birthday}',
+                                      '${state.personCaster?.birthday}',
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w500,
@@ -172,7 +172,7 @@ class _CasterScreenState extends BaseBlocState<CasterScreen> {
                                       height: 10,
                                     ),
                                     Text(
-                                      '${state.personCaster!.known_for_department}',
+                                      '${state.personCaster?.known_for_department}',
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w500,
@@ -218,7 +218,7 @@ class _CasterScreenState extends BaseBlocState<CasterScreen> {
                                       height: 10,
                                     ),
                                     Text(
-                                      '${state.personCaster!.popularity}',
+                                      '${state.personCaster?.popularity}',
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w500,
@@ -230,23 +230,6 @@ class _CasterScreenState extends BaseBlocState<CasterScreen> {
                             ),
                           ),
                         ),
-                        // Row(
-                        //   children: [
-                        //     Icon(
-                        //       Icons.cake,
-                        //       color: Colors.white.withOpacity(0.8),
-                        //       size: 30,
-                        //     ),
-                        //     Text(
-                        //       'Birthday:',
-                        //       style: TextStyle(
-                        //           color: Colors.white,
-                        //           fontSize: 18,
-                        //           fontWeight: FontWeight.bold),
-                        //     ),
-                        //     Text('${state.personCaster!.birthday}')
-                        //   ],
-                        // )
                       ],
                     ),
                   ),
