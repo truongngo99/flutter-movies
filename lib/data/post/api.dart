@@ -3,9 +3,12 @@ import 'package:flutter_movies/data/response/authentication/login_body.dart';
 import 'package:flutter_movies/data/response/authentication/request_token.dart';
 import 'package:flutter_movies/data/response/cast_crew/cast_crew.dart';
 import 'package:flutter_movies/data/response/image/image_model.dart';
+import 'package:flutter_movies/data/response/model/model.dart';
+import 'package:flutter_movies/data/response/model/save_model.dart';
 import 'package:flutter_movies/data/response/movie/movie_model.dart';
 import 'package:flutter_movies/data/response/person_id/person_id.dart';
 import 'package:flutter_movies/data/response/review_movie/review_movie_model.dart';
+import 'package:flutter_movies/data/response/search_key/search_key_model.dart';
 import 'package:flutter_movies/data/response/trailer/trailer.dart';
 import 'package:teq_flutter_core/teq_flutter_core.dart';
 
@@ -60,6 +63,18 @@ abstract class Api {
   Method get getProfile =>
       GET('/person/{castId}?api_key=a7e38c80a0efc42034dfb5c8b95a72cb');
   Future<PersonCaster> getProfileCasterMovie(String castId);
+
+  Method get searchMovie => GET(
+      'search/movie?api_key=a7e38c80a0efc42034dfb5c8b95a72cb&query={query}');
+  Future<MovieModel> getMovieSearch(String query);
+
+  Method get searchKey => GET(
+      'search/keyword?api_key=a7e38c80a0efc42034dfb5c8b95a72cb&query={query}');
+  Future<SearchKeyModel> getSearchKey(String query);
+
+  Method get searchMul =>
+      GET('search/multi?api_key=a7e38c80a0efc42034dfb5c8b95a72cb');
+  Future<SaveModel> getSearchMul(String query);
 }
 
 class ApiUrl extends BaseUrl {
