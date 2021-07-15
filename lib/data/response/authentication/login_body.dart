@@ -14,3 +14,6 @@ class LoginBody {
       _$LoginBodyFromJson(json);
   Map<String, dynamic> toJson() => _$LoginBodyToJson(this);
 }
+
+final LoginBody loginBody =
+    LoginBody(username: 'aa', password: 'bb', request_token: 'request_token');

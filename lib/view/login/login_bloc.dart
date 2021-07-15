@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_movies/data/post/api.dart';
+import 'package:flutter_movies/data/response/authentication/login_body.dart';
 
 import 'package:flutter_movies/utils/preference_util.dart';
 import 'package:flutter_movies/view/login/login_event.dart';

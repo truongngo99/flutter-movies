@@ -1,11 +1,9 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_movies/data/post/api.dart';
 import 'package:flutter_movies/data/post/api_impl.dart';
 
 import 'package:flutter_movies/view/splash/splash_screen.dart';
-import 'package:flutter_movies/view/trailer/trailer_bloc.dart';
 
 import 'package:teq_flutter_core/teq_flutter_core.dart';
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movies/view/movie_screen/movie_screen.dart';
+import 'package:flutter_movies/view/search/search_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -14,10 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     MovieScreen(),
-    Text(
-      'Index 1: Business',
-      style: optionStyle,
-    ),
+    SearchScreen(),
     Text(
       'Index 2: School',
       style: optionStyle,
