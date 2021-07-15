@@ -10,6 +10,7 @@ import 'package:flutter_movies/data/response/movie/result_movie.dart';
 import 'package:flutter_movies/data/response/person_id/person_id.dart';
 import 'package:flutter_movies/data/response/review_movie/review_movie_model.dart';
 import 'package:flutter_movies/data/response/search_key/search_key_model.dart';
+import 'package:flutter_movies/data/response/search_multi/search_multi.dart';
 import 'package:flutter_movies/data/response/trailer/trailer.dart';
 import 'package:teq_flutter_core/teq_flutter_core.dart';
 
@@ -126,22 +127,10 @@ class ApiImpl extends BaseAPI with Api {
   }
 
   @override
-  Future<SaveModel> getSearchMul(String query) async {
-    SaveModel saveMode = SaveModel();
-    var modelA =
-        ModelA.fromJson(await sendApiRequest(searchMul, queryParameters: {
+  Future<SearchMultiModel> getSearchMul(String query) async {
+    return SearchMultiModel.fromJson(
+        await sendApiRequest(searchMul, queryParameters: {
       'query': query,
     }));
-    if (modelA != null) {
-      modelA.results?.forEach((element) {
-        if (element['media_type'] == 'movie' || element['media_type'] == 'tv') {
-          saveMode.results?.add(ListMovieResults.fromJson(element));
-        }
-        if (element['media_type'] == 'person') {
-          saveMode.results?.add(Cast.fromJson(element));
-        }
-      });
-    }
-    return saveMode;
   }
 }

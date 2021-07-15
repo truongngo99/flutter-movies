@@ -39,6 +39,7 @@ dependencies:
   carousel_slider: ^4.0.0
   flutter_rating_bar: ^4.0.0
   youtube_player_flutter: ^8.0.0
+  flutter_typeahead: ^3.2.0
   teq_flutter_core:
     git:
       url: git@github.com:ExecutionLab/teq-flutter-core.git

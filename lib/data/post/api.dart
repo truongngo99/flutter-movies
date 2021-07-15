@@ -9,6 +9,7 @@ import 'package:flutter_movies/data/response/movie/movie_model.dart';
 import 'package:flutter_movies/data/response/person_id/person_id.dart';
 import 'package:flutter_movies/data/response/review_movie/review_movie_model.dart';
 import 'package:flutter_movies/data/response/search_key/search_key_model.dart';
+import 'package:flutter_movies/data/response/search_multi/search_multi.dart';
 import 'package:flutter_movies/data/response/trailer/trailer.dart';
 import 'package:teq_flutter_core/teq_flutter_core.dart';
 
@@ -74,7 +75,7 @@ abstract class Api {
 
   Method get searchMul =>
       GET('search/multi?api_key=a7e38c80a0efc42034dfb5c8b95a72cb');
-  Future<SaveModel> getSearchMul(String query);
+  Future<SearchMultiModel> getSearchMul(String query);
 }
 
 class ApiUrl extends BaseUrl {

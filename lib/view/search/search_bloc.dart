@@ -13,8 +13,9 @@ class SearchBloc extends BaseBloc<SearchState> {
       yield state.copyWith(isLoading: true);
       // var resultMovie = await api.getMovieSearch(event.search);
       // var resultKey = await api.getSearchKey(event.search);
-      var result = await api.getSearchMul(event.search);
-      yield state.copyWith(isLoading: false, saveModel: result);
+      var result = await api.getSearchKey(event.search);
+
+      yield state.copyWith(isLoading: false, searchKeyModel: result);
     }
   }
 }
