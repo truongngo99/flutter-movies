@@ -9,23 +9,25 @@ class HeaderSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
-      items: movieTrendingModel?.results.map((e) {
-        return Builder(
-          builder: (BuildContext context) {
-            return Container(
-                width: double.infinity,
-                child: Image.network(
-                    'https://image.tmdb.org/t/p/original${e.backdrop_path}'));
-          },
-        );
-      }).toList(),
-      options: CarouselOptions(
-        autoPlay: true,
-        aspectRatio: 2.0,
-        height: 180,
-        enlargeCenterPage: true,
-      ),
-    );
+    return movieTrendingModel?.results == null
+        ? CircularProgressIndicator()
+        : CarouselSlider(
+            items: movieTrendingModel?.results.map((e) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return Container(
+                      width: double.infinity,
+                      child: Image.network(
+                          'https://image.tmdb.org/t/p/original${e.backdrop_path}'));
+                },
+              );
+            }).toList(),
+            options: CarouselOptions(
+              autoPlay: true,
+              aspectRatio: 2.0,
+              height: 180,
+              enlargeCenterPage: true,
+            ),
+          );
   }
 }

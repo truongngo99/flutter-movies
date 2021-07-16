@@ -17,11 +17,11 @@ class _HomeScreenState extends State<HomeScreen> {
     MovieScreen(),
     SearchScreen(),
     Text(
-      'Index 2: School',
+      'No Update',
       style: optionStyle,
     ),
     Text(
-      'Index 3: Settings',
+      'No Update',
       style: optionStyle,
     ),
   ];
@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blueGrey,
+        selectedItemColor: Color(0xffff9a6f),
         unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
       ),

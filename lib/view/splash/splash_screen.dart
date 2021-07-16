@@ -43,46 +43,56 @@ class _SplashScreenState extends BaseBlocState<SplashScreen> {
   }
 
   Widget _buildBody(BuildContext context, SplashStateSuccess state) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body: state.isLoading
-            ? Center(
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  color: Colors.white,
-                ),
-              )
-            : Center(
-                child: Column(
-                  children: [
-                    Image.asset('assets/images/logo.png'),
-                    SizedBox(
-                      height: 20,
+    return state.isLoading
+        ? Scaffold(
+            backgroundColor: Colors.white,
+            body: Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                color: Colors.white,
+              ),
+            ),
+          )
+        : Scaffold(
+            backgroundColor: Color(0xffff9a6f),
+            body: Center(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Image.asset(
+                    'assets/images/logo.png',
+                    height: 300,
+                    width: 300,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  CircularProgressIndicator(
+                    color: Colors.black,
+                  ),
+                  SizedBox(
+                    height: 200,
+                  ),
+                  Text(
+                    'Teq',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontStyle: FontStyle.italic),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    'CopyRight 2021',
+                    style: TextStyle(
+                      color: Colors.black,
                     ),
-                    CircularProgressIndicator(
-                      color: Colors.red,
-                    ),
-                    SizedBox(
-                      height: 200,
-                    ),
-                    Text(
-                      'Teq',
-                      style: TextStyle(
-                          color: Colors.redAccent,
-                          fontSize: 20,
-                          fontStyle: FontStyle.italic),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Text(
-                      'CopyRight 2021',
-                      style: TextStyle(
-                        color: Colors.redAccent,
-                      ),
-                    )
-                  ],
-                ),
-              ));
+                  )
+                ],
+              ),
+            ));
   }
 }
