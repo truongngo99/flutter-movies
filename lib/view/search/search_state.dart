@@ -1,6 +1,3 @@
-import 'package:flutter_movies/data/response/model/model.dart';
-import 'package:flutter_movies/data/response/model/save_model.dart';
-import 'package:flutter_movies/data/response/movie/movie_model.dart';
 import 'package:flutter_movies/data/response/search_key/search_key_model.dart';
 import 'package:flutter_movies/data/response/search_multi/search_multi.dart';
 import 'package:teq_flutter_core/teq_flutter_core.dart';
