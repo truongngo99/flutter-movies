@@ -56,31 +56,32 @@ class _SearchScreenState extends BaseBlocState<SearchScreen> {
                   border: OutlineInputBorder(),
                 ),
               ),
-              state.searchKeyModel == null ||
-                      state.searchKeyModel!.results!.length == 1
+              state.searchKeyModel == null
                   ? Container()
                   : Container(
                       height: 300,
-                      child: ListView.builder(
-                          itemCount: state.searchKeyModel?.results?.length,
-                          itemBuilder: (context, index) {
-                            return ListTile(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            SearchScreenFilter(
-                                                keySearch: state
-                                                        .searchKeyModel
-                                                        ?.results?[index]
-                                                        .name ??
-                                                    '')));
-                              },
-                              title: Text(
-                                  '${state.searchKeyModel?.results?[index].name}'),
-                            );
-                          }),
+                      child: state.isLoading
+                          ? Center(child: CircularProgressIndicator())
+                          : ListView.builder(
+                              itemCount: state.searchKeyModel?.results?.length,
+                              itemBuilder: (context, index) {
+                                return ListTile(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SearchScreenFilter(
+                                                    keySearch: state
+                                                            .searchKeyModel
+                                                            ?.results?[index]
+                                                            .name ??
+                                                        '')));
+                                  },
+                                  title: Text(
+                                      '${state.searchKeyModel?.results?[index].name}'),
+                                );
+                              }),
                     ),
             ],
           ),

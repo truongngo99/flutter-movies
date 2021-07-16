@@ -123,13 +123,13 @@ class _DetailScreenState extends BaseBlocState<DetailScreen> {
                                   maxLines: 5,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: Color(0xffff9a6f),
                                       fontSize: 18,
                                       fontWeight: FontWeight.w500),
                                 ),
                               ),
                               Text('${widget.releaseDate}',
-                                  style: TextStyle(color: Colors.grey[350])),
+                                  style: TextStyle(color: Color(0xffff9a6f))),
                             ],
                           ),
                           SizedBox(
@@ -156,7 +156,7 @@ class _DetailScreenState extends BaseBlocState<DetailScreen> {
                               Text(
                                 '${widget.voteCount}',
                                 style: TextStyle(
-                                  color: Colors.grey[350],
+                                  color: Color(0xffff9a6f),
                                 ),
                               ),
                             ],
@@ -166,7 +166,7 @@ class _DetailScreenState extends BaseBlocState<DetailScreen> {
                             child: Text(
                               '${widget.voteAverage}',
                               style: TextStyle(
-                                  color: Colors.grey[350],
+                                  color: Color(0xffff9a6f),
                                   fontSize: 25,
                                   fontWeight: FontWeight.w700),
                             ),
@@ -193,7 +193,7 @@ class _DetailScreenState extends BaseBlocState<DetailScreen> {
                         style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white.withOpacity(0.7),
+                          color: Color(0xffff9a6f),
                         ),
                       ),
                       Text('     ${widget.overView}',
@@ -209,7 +209,7 @@ class _DetailScreenState extends BaseBlocState<DetailScreen> {
                           style: TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white.withOpacity(0.7),
+                            color: Color(0xffff9a6f),
                           ),
                         ),
                       ),
@@ -281,7 +281,7 @@ class _DetailScreenState extends BaseBlocState<DetailScreen> {
                           style: TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white.withOpacity(0.7),
+                            color: Color(0xffff9a6f),
                           ),
                         ),
                       ),
@@ -337,7 +337,7 @@ class _DetailScreenState extends BaseBlocState<DetailScreen> {
                           style: TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white.withOpacity(0.7),
+                            color: Color(0xffff9a6f),
                           ),
                         ),
                       ),

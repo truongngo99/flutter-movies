@@ -1,12 +1,8 @@
 import 'package:flutter_movies/data/response/authentication/create_session.dart';
 import 'package:flutter_movies/data/response/authentication/request_token.dart';
-import 'package:flutter_movies/data/response/cast_crew/cast.dart';
 import 'package:flutter_movies/data/response/cast_crew/cast_crew.dart';
 import 'package:flutter_movies/data/response/image/image_model.dart';
-import 'package:flutter_movies/data/response/model/model.dart';
-import 'package:flutter_movies/data/response/model/save_model.dart';
 import 'package:flutter_movies/data/response/movie/movie_model.dart';
-import 'package:flutter_movies/data/response/movie/result_movie.dart';
 import 'package:flutter_movies/data/response/person_id/person_id.dart';
 import 'package:flutter_movies/data/response/review_movie/review_movie_model.dart';
 import 'package:flutter_movies/data/response/search_key/search_key_model.dart';

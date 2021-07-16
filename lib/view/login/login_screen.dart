@@ -8,6 +8,8 @@ import 'package:flutter_movies/view/home.dart';
 import 'package:flutter_movies/view/login/login_bloc.dart';
 import 'package:flutter_movies/view/login/login_event.dart';
 import 'package:flutter_movies/view/login/login_state.dart';
+import 'package:flutter_movies/view/widget/odevider.dart';
+import 'package:flutter_movies/view/widget/social_icon.dart';
 
 import 'package:teq_flutter_core/teq_flutter_core.dart';
 
@@ -53,6 +55,7 @@ class _LoginScreenState extends BaseBlocState<LoginScreen> {
 
   Widget _buildBody(BuildContext context, LoginStateSuccess state) {
     return Scaffold(
+      backgroundColor: Color(0xfff2f2f5),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -67,7 +70,8 @@ class _LoginScreenState extends BaseBlocState<LoginScreen> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40, vertical: 10),
                         child: TextFormField(
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -77,7 +81,11 @@ class _LoginScreenState extends BaseBlocState<LoginScreen> {
                           controller: _usernameCtrl,
                           decoration: InputDecoration(
                             hintText: 'Username',
-                            prefixIcon: Icon(Icons.person),
+                            hintStyle: TextStyle(color: Color(0xffff9a6f)),
+                            prefixIcon: Icon(
+                              Icons.person,
+                              color: Color(0xffff9a6f),
+                            ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
@@ -85,7 +93,8 @@ class _LoginScreenState extends BaseBlocState<LoginScreen> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40, vertical: 10),
                         child: TextFormField(
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -96,7 +105,11 @@ class _LoginScreenState extends BaseBlocState<LoginScreen> {
                           controller: _passwordCtrl,
                           decoration: InputDecoration(
                             hintText: 'Password',
-                            prefixIcon: Icon(Icons.lock),
+                            hintStyle: TextStyle(color: Color(0xffff9a6f)),
+                            prefixIcon: Icon(
+                              Icons.lock,
+                              color: Color(0xffff9a6f),
+                            ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
@@ -109,7 +122,7 @@ class _LoginScreenState extends BaseBlocState<LoginScreen> {
                 height: 30,
               ),
               Container(
-                width: MediaQuery.of(context).size.width - 20,
+                width: MediaQuery.of(context).size.width - 77,
                 height: 60,
                 child: ElevatedButton(
                   onPressed: () {
@@ -129,7 +142,7 @@ class _LoginScreenState extends BaseBlocState<LoginScreen> {
                           style: TextStyle(fontSize: 24),
                         ),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.red,
+                    primary: Color(0xffff5f1b),
                     textStyle: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                     shape: RoundedRectangleBorder(
@@ -139,56 +152,23 @@ class _LoginScreenState extends BaseBlocState<LoginScreen> {
                 ),
               ),
               SizedBox(
-                height: 30,
+                height: 10,
               ),
-              Text(
-                'OR',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontStyle: FontStyle.italic,
-                  fontWeight: FontWeight.w300,
-                ),
+              OrDivider(
+                text: 'OR',
               ),
-              SizedBox(
-                height: 30,
-              ),
+              SizedBox(height: 10),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    width: 150,
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Facebook',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.blue,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                    ),
+                  SocialIcon(
+                    iconSrc: 'assets/images/facebook.svg',
+                    onPress: () {},
                   ),
-                  Container(
-                    width: 150,
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Google',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.redAccent,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                    ),
-                  ),
+                  SocialIcon(
+                    iconSrc: 'assets/images/google-plus.svg',
+                    onPress: () {},
+                  )
                 ],
               ),
             ],

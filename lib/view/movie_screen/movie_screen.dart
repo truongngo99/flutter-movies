@@ -52,7 +52,7 @@ class _MovieScreenState extends BaseBlocState<MovieScreen> {
                           style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
-                              color: Colors.orange),
+                              color: Color(0xffff9a6f)),
                           textAlign: TextAlign.start,
                         ),
                       ),
@@ -66,7 +66,7 @@ class _MovieScreenState extends BaseBlocState<MovieScreen> {
                           style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
-                              color: Colors.orange),
+                              color: Color(0xffff9a6f)),
                           textAlign: TextAlign.start,
                         ),
                       ),
@@ -78,7 +78,7 @@ class _MovieScreenState extends BaseBlocState<MovieScreen> {
                           style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
-                              color: Colors.orange),
+                              color: Color(0xffff9a6f)),
                           textAlign: TextAlign.start,
                         ),
                       ),
@@ -92,7 +92,7 @@ class _MovieScreenState extends BaseBlocState<MovieScreen> {
                           style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.bold,
-                              color: Colors.orange),
+                              color: Color(0xffff9a6f)),
                           textAlign: TextAlign.start,
                         ),
                       ),
