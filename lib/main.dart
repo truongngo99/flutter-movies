@@ -9,7 +9,7 @@ import 'package:teq_flutter_core/teq_flutter_core.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
+  Bloc.observer = SimpleBlocObserve();
   runApp(MyApp());
 }
 
@@ -43,5 +43,26 @@ class _MyAppState extends State<MyApp> {
         height: double.infinity,
       ),
     );
+  }
+}
+
+class SimpleBlocObserve extends BlocObserver {
+  @override
+  void onEvent(Bloc bloc, Object? event) {
+    print(event);
+    super.onEvent(bloc, event);
+  }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    print(transition);
+
+    super.onTransition(bloc, transition);
+  }
+
+  @override
+  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
+    print(error);
+    super.onError(bloc, error, stackTrace);
   }
 }
